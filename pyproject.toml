@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "cpvt-website-models"
+version = "0.1.0"
+description = "Sqlalchmey models for the CPVT Database website"
+authors = ["Alex Chang"]
+license = "MIT"
+readme = "README.md"
+keywords = ["cpvt", "database", "sqlalchemy"]
+include = [
+    "LICENSE",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Healthcare Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: SQL",
+    "Topic :: Database",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.31"}
+pydantic = "^2.8.2"
+pydantic-settings = "^2.4.0"
+
+
+[tool.poetry.group.dev.dependencies]
+alembic = "^1.13.2"
+ruff = "^0.5.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
