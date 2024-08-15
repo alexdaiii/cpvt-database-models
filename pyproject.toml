@@ -1,14 +1,13 @@
-[tool.poetry]
+[project]
 name = "cpvt-website-models"
-version = "0.1.0"
+version = "0.1.16"
 description = "Sqlalchmey models for the CPVT Database website"
-authors = ["Alex Chang"]
-license = "MIT"
+authors = [
+    { name = "Alexander Chang" }
+]
+license = { text = "MIT License" }
 readme = "README.md"
 keywords = ["cpvt", "database", "sqlalchemy"]
-include = [
-    "LICENSE",
-]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -20,18 +19,22 @@ classifiers = [
     "Topic :: Database",
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
 ]
+dependencies = [
+    "sqlalchemy[asyncio]>=2.0.32",
+    "parsley>=1.3",
+    "biopython>=1.84",
+    "hgvs>=1.5.4",
+    "sqlparse>=0.5.1",
+    "psycopg>=3.2.1",
+]
+requires-python = ">=3.11"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-sqlalchemy = {extras = ["asyncio"], version = "^2.0.31"}
-pydantic = "^2.8.2"
-pydantic-settings = "^2.4.0"
+[tool.setuptools.packages.find]
+include = ["cpvt_website_models"]
 
-
-[tool.poetry.group.dev.dependencies]
-alembic = "^1.13.2"
-ruff = "^0.5.5"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.6.0",
+    "alembic>=1.13.2",
+    "psycopg[binary]>=3.2.1",
+]

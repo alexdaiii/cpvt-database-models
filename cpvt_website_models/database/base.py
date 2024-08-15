@@ -1,9 +1,8 @@
 import datetime
-from typing import Any, TYPE_CHECKING
+from typing import Any
 
 from sqlalchemy import DateTime, MetaData, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-
 
 meta = MetaData(
     naming_convention={
@@ -56,12 +55,4 @@ class Base(BaseBase, CreatedAtMixin):
     ...
 
 
-class PgBase(Base, DeclarativeBase):
-    ...
-
-
-class RdbBase(Base, DeclarativeBase):
-    ...
-
-
-__all__ = ["Base", "PgBase", "RdbBase", "BaseBase"]
+__all__ = ["Base", "BaseBase"]
