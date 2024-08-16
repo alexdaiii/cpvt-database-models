@@ -7,16 +7,13 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:
-    from ..pathogenicity_predictor import PathogenicityPrediction
-    from ..individuals import IndividualVariant
-    from ..variants import (
-        ClinicalSignificance,
-        ClinVarVariantLinkedCondition,
-        DatasetVariant,
-        PublicationVariant,
-        VariantClinVarInfo,
-        SequenceVariantDb,
-    )
+    from cpvt_website_models.models.pathogenicity_predictor import \
+        PathogenicityPrediction
+    from cpvt_website_models.models.individuals import IndividualVariant
+    from .variant_properties import ClinicalSignificance, VariantClinVarInfo
+    from .variant_origins import DatasetVariant, PublicationVariant
+    from .variant_links import ClinVarVariantLinkedCondition
+    from .hgvs_variant import SequenceVariantDb
 
 
 class Variant(Base):

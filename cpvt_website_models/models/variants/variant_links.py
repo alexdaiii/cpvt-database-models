@@ -10,8 +10,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:
-    from ..conditions import Condition
-    from ..variants import Variant
+    from cpvt_website_models.models.conditions import Condition
+    from .variant import Variant
 
 
 class ClinVarVariantLinkedCondition(Base):

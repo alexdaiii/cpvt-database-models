@@ -7,8 +7,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:
-    from ...variants import Variant
-    from ...individuals import Individual, IndividualVariantConditionLink
+    from cpvt_website_models.models.variants.variant import Variant
+    from cpvt_website_models.models.individuals.individual import Individual
+    from .individual_variant_condition_link import \
+        IndividualVariantConditionLink
 
 
 class VariantInheritance(Base):

@@ -7,7 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:
-    from ..variants import Variant
+    from .variant import Variant
 
 
 # ---------------------------------------------------------

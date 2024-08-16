@@ -532,4 +532,5 @@ class ProteinConsequence(Base):
     )
 
 
-__all__ = ["SequenceVariantDb", "EditType", "edit_type_ids"]
+__all__ = ["SequenceVariantDb", "EditType", "edit_type_ids",
+           "ProteinConsequence"]

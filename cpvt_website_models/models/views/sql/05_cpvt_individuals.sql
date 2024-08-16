@@ -1,4 +1,4 @@
-DROP VIEW IF EXISTS cpvt_patients_v;
+DROP VIEW IF EXISTS cpvt_patients_v CASCADE;
 
 
 CREATE VIEW cpvt_patients_v AS

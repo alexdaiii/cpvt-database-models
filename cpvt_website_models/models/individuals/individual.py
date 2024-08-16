@@ -7,10 +7,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:
-    from .family_history import FamilyHistoryRecord
-    from ..individuals import IndividualCondition, IndividualVariant
+    from cpvt_website_models.models.publication import Publication
+    from .association_tables import IndividualToPublication, \
+        IndividualCondition, IndividualVariant
     from .treatments import TreatmentRecord
-    from ..publication import Publication
+    from .family_history import FamilyHistoryRecord
 
 
 class IndividualSex(Base):

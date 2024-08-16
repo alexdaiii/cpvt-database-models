@@ -10,8 +10,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:
-    from ..publication import Publication
-    from ..variants import Variant
+    from cpvt_website_models.models.publication import Publication
+    from .variant import Variant
 
 
 class VariantsDataset(Base):

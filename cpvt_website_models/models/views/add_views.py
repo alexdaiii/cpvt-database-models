@@ -1,20 +1,22 @@
+import os
 import time
 
 import sqlparse
 import psycopg
+
+from cpvt_website_models.settings import get_settings
 
 
 def get_sql_files():
     """
     Sql files should be located in the ./sql directory relative to this file
     """
-    import os
 
     sql_files = []
 
     for root, _, files in os.walk(
             os.path.join(os.path.dirname(__file__), "sql")):
-        for file in files:
+        for file in sorted(files):
             if file.endswith(".sql"):
                 sql_files.append(os.path.join(root, file))
 
@@ -24,7 +26,10 @@ def get_sql_files():
 def add_views_pg():
     print("Adding views")
 
-    with psycopg.connect("") as conn:
+    settings = get_settings()
+    print(settings)
+
+    with psycopg.connect(settings.postgresql_dsn) as conn:
         sql_files = get_sql_files()
 
         for sql_file in sql_files:

@@ -7,11 +7,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:
-    from ...conditions import Condition
-    from ...individuals import (
-        Individual,
-        IndividualVariantConditionLink,
-    )
+    from .individual_variant_condition_link import \
+        IndividualVariantConditionLink
+    from cpvt_website_models.models.individuals.individual import Individual
+    from cpvt_website_models.models.conditions import Condition
 
 
 class IndividualCondition(Base):

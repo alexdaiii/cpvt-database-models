@@ -6,7 +6,8 @@ from sqlalchemy.orm import Mapped, relationship, mapped_column
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:
-    from ...individuals import IndividualVariant, IndividualCondition
+    from .individual_variants import IndividualVariant
+    from .individual_condition import IndividualCondition
 
 
 class IndividualVariantConditionLink(Base):
