@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from cpvt_website_models.models.variants.variant import Variant
     from cpvt_website_models.models.individuals.individual import Individual
     from .individual_variant_condition_link import \
@@ -17,7 +17,7 @@ class VariantInheritance(Base):
     __tablename__ = "variant_inheritance"
 
     variant_inheritance_id: Mapped[int] = mapped_column(primary_key=True)
-    variant_inheritance: Mapped[CITEXT] = mapped_column(CITEXT, unique=True)
+    variant_inheritance: Mapped[str] = mapped_column(CITEXT, unique=True)
 
     individual_variants: Mapped[list["IndividualVariant"]] = relationship(
         "IndividualVariant",
@@ -33,7 +33,7 @@ class Zygosity(Base):
     __tablename__ = "zygosity"
 
     zygosity_id: Mapped[int] = mapped_column(primary_key=True)
-    zygosity: Mapped[CITEXT] = mapped_column(CITEXT, unique=True)
+    zygosity: Mapped[str] = mapped_column(CITEXT, unique=True)
 
     individual_variants: Mapped[list["IndividualVariant"]] = relationship(
         "IndividualVariant",

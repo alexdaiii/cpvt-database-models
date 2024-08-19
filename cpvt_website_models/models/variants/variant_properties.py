@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from .variant import Variant
 
 
@@ -45,7 +45,7 @@ class ClinicalSignificance(Base):
     __tablename__ = "clinical_significance"
 
     clinical_significance_id: Mapped[int] = mapped_column(primary_key=True)
-    clinical_significance: Mapped[CITEXT] = mapped_column(CITEXT, unique=True)
+    clinical_significance: Mapped[str] = mapped_column(CITEXT, unique=True)
 
     variants: Mapped[list["Variant"]] = relationship(
         "Variant",

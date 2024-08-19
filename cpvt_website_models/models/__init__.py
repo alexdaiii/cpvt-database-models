@@ -12,6 +12,7 @@ from .individuals import (
     FamilyMemberHistory,
     Individual,
     IndividualSex,
+    IndividualOriginalExcelRow,
     IndividualToPublication,
     Treatment,
     TreatmentRecord,
@@ -34,6 +35,8 @@ from .variants import (
     VariantsDataset,
     DatasetVariant,
     PublicationVariant,
+    VariantClinVarInfo,
+    ClinicalSignificance,
 )
 from .conditions import (
     Condition,
@@ -61,6 +64,7 @@ __all__ = [
     "FamilyMemberHistory",
     "Individual",
     "IndividualSex",
+    "IndividualOriginalExcelRow",
     "IndividualToPublication",
     "Treatment",
     "TreatmentRecord",
@@ -85,4 +89,6 @@ __all__ = [
     "PathogenicityPredictor",
     "PathogenicityPrediction",
     "Publication",
+    "VariantClinVarInfo",
+    "ClinicalSignificance",
 ]

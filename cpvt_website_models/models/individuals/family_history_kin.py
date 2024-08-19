@@ -9,7 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from .family_history import FamilyHistoryRecord
 
 
@@ -19,7 +19,7 @@ class KinshipName(Base):
     kinship_name_id: Mapped[int] = mapped_column(
         primary_key=True,
     )
-    name: Mapped[CITEXT] = mapped_column(
+    name: Mapped[str] = mapped_column(
         CITEXT, unique=True, comment="Biological kinship name"
     )
 

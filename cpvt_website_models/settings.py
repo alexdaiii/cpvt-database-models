@@ -1,7 +1,6 @@
 from functools import lru_cache
 
 from pydantic import (
-    PostgresDsn,
     computed_field,
 )
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -9,6 +8,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     # PostgreSQL
+    driver: str = "postgresql+psycopg_async"
     postgresql_host: str = "localhost"
     postgresql_username: str = "postgres"
     postgresql_password: str = "postgres"
@@ -18,20 +18,8 @@ class Settings(BaseSettings):
 
     @computed_field
     @property
-    def _postgresql_dsn(self) -> PostgresDsn:
-        return PostgresDsn.build(
-            scheme="postgresql",
-            username=self.postgresql_username,
-            password=self.postgresql_password,
-            host=self.postgresql_host,
-            port=self.postgresql_port,
-            path=self.postgresql_database,
-        )
-
-    @computed_field
-    @property
     def postgresql_dsn(self) -> str:
-        return self._postgresql_dsn.__str__()
+        return f"{self.driver}://{self.postgresql_username}:{self.postgresql_password}@{self.postgresql_host}:{self.postgresql_port}/{self.postgresql_database}"
 
     model_config = SettingsConfigDict(env_file='.env',
                                       env_file_encoding='utf-8',

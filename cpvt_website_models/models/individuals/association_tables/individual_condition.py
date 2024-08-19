@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from .individual_variant_condition_link import \
         IndividualVariantConditionLink
     from cpvt_website_models.models.individuals.individual import Individual
@@ -35,7 +35,7 @@ class IndividualCondition(Base):
     has_condition: Mapped[bool | None] = mapped_column(
         comment="Does the patient have this condition?"
     )
-    description: Mapped[CITEXT | None] = mapped_column(
+    description: Mapped[str | None] = mapped_column(
         CITEXT, comment="The description of the patient's condition"
     )
     age_of_onset: Mapped[float | None] = mapped_column(

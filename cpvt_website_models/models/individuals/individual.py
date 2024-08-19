@@ -6,10 +6,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from cpvt_website_models.models.publication import Publication
-    from .association_tables import IndividualToPublication, \
-        IndividualCondition, IndividualVariant
+    from .association_tables import IndividualCondition, IndividualVariant
     from .treatments import TreatmentRecord
     from .family_history import FamilyHistoryRecord
 
@@ -18,7 +17,7 @@ class IndividualSex(Base):
     __tablename__ = "individual_sex"
 
     individual_sex_id: Mapped[int] = mapped_column(primary_key=True)
-    value: Mapped[CITEXT] = mapped_column(CITEXT, unique=True)
+    value: Mapped[str] = mapped_column(CITEXT, unique=True)
 
     individuals: Mapped[list["Individual"]] = relationship("Individual")
 
@@ -114,4 +113,5 @@ class IndividualToPublication(Base):
     )
 
 
-__all__ = ["Individual", "IndividualSex", "IndividualToPublication"]
+__all__ = ["Individual", "IndividualSex", "IndividualToPublication",
+           "IndividualOriginalExcelRow"]

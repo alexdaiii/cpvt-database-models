@@ -9,7 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from cpvt_website_models.models.publication import Publication
     from .variant import Variant
 
@@ -18,8 +18,8 @@ class VariantsDataset(Base):
     __tablename__ = "variants_dataset"
 
     dataset_id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[CITEXT] = mapped_column(CITEXT, unique=True)
-    description: Mapped[CITEXT | None] = mapped_column(CITEXT)
+    name: Mapped[str] = mapped_column(CITEXT, unique=True)
+    description: Mapped[str | None] = mapped_column(CITEXT)
     url: Mapped[str | None] = mapped_column()
 
     variants: Mapped[list["DatasetVariant"]] = relationship(

@@ -20,7 +20,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 from Bio.SeqUtils import seq1
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from cpvt_website_models.models import Variant
 
 
@@ -60,7 +60,7 @@ class EditType(Base):
     __tablename__ = "edit_type"
 
     edit_type_id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[CITEXT] = mapped_column(CITEXT, unique=True)
+    name: Mapped[str] = mapped_column(CITEXT, unique=True)
     description: Mapped[str | None] = mapped_column()
 
     __table_args__ = (
@@ -206,7 +206,8 @@ class SequenceVariantDb(
                 all_args["p_edit_init_met"] = variant.posedit.edit.init_met
 
     def _determine_molecular_consequence_id(
-            self, grammar: Callable[[Any], _GrammarWrapper], hgvs_string: str
+            self, grammar: Callable[[Any], _GrammarWrapper] | None,
+            hgvs_string: str
     ) -> str:
         """
         Get the molecular consequence of the sequence variant
@@ -453,6 +454,7 @@ class ProteinConsequence(Base):
     ):
         if sequence_variant is None:
             super().__init__(**kwargs)
+            return
 
         if isinstance(sequence_variant, SequenceVariant):
             self._create_from_sequence_variant(sequence_variant)

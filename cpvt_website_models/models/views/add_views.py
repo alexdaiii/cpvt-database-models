@@ -1,8 +1,10 @@
+import asyncio
 import os
 import time
 
 import sqlparse
-import psycopg
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 
 from cpvt_website_models.settings import get_settings
 
@@ -23,33 +25,28 @@ def get_sql_files():
     return sql_files
 
 
-def add_views_pg():
+async def add_views_pg(session: AsyncSession):
     print("Adding views")
 
-    settings = get_settings()
-    print(settings)
+    sql_files = get_sql_files()
 
-    with psycopg.connect(settings.postgresql_dsn) as conn:
-        sql_files = get_sql_files()
+    for sql_file in sql_files:
+        print(f"Executing {sql_file}")
+        await execute_file(session, sql_file)
 
-        for sql_file in sql_files:
-            print(f"Executing {sql_file}")
-            execute_file(conn, sql_file)
+    await session.commit()
 
 
-def execute_file(conn, sql_file):
+async def execute_file(session: AsyncSession, sql_file):
     # start a timer
     start_time = time.time()
 
-    with conn.cursor():
-        with open(sql_file, "r") as f:
-            sql = f.read()
+    with open(sql_file, "r") as f:
+        sql = f.read()
 
-            for stmt in sqlparse.split(sql):
-                print(f"Executing: \n{stmt}")
-                conn.execute(stmt)
-
-        conn.commit()
+        for stmt in sqlparse.split(sql):
+            print(f"Executing: \n{stmt}")
+            await session.execute(text(stmt))
 
     # end the timer
     end_time = time.time()
@@ -57,11 +54,14 @@ def execute_file(conn, sql_file):
     print(f"Time taken: {end_time - start_time:.2f} seconds")
 
 
-def main():
-    add_views_pg()
+async def main():
+    asyncio_engine = create_async_engine(get_settings().postgresql_dsn)
+
+    async with asyncio_engine.begin() as conn:
+        await add_views_pg(conn)
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
 
-__all__ = ["add_views_pg"]
+__all__ = ["add_views_pg", "main"]

@@ -45,4 +45,30 @@ class GeneUta(BaseBase):
     __table_args__ = ({"schema": "uta"},)
 
 
+class ExonSetUta(BaseBase):
+    __tablename__ = "exon_set"
+
+    exon_set_id: Mapped[int] = mapped_column(primary_key=True)
+    tx_ac: Mapped[str] = mapped_column()
+    alt_ac: Mapped[str] = mapped_column()
+    alt_strand: Mapped[int] = mapped_column()
+    alt_aln_method: Mapped[str] = mapped_column()
+    added: Mapped[datetime | None] = mapped_column()
+
+    __table_args__ = ({"schema": "uta"},)
+
+
+class Exon(BaseBase):
+    __tablename__ = "exon"
+
+    exon_id: Mapped[int] = mapped_column(primary_key=True)
+    exon_set_id: Mapped[int] = mapped_column()
+    start_i: Mapped[int] = mapped_column()
+    end_i: Mapped[int] = mapped_column()
+    ord: Mapped[int] = mapped_column()
+    name: Mapped[str] = mapped_column()
+
+    __table_args__ = ({"schema": "uta"},)
+
+
 __all__ = ["TranscriptUta", "SeqAnnoUta", "GeneUta"]

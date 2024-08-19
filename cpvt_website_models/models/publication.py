@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from .individuals import IndividualToPublication
     from .variants import PublicationVariant
 
@@ -15,8 +15,8 @@ class Publication(Base):
     __tablename__ = "publication"
 
     publication_id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[CITEXT | None] = mapped_column(CITEXT)
-    first_author: Mapped[CITEXT | None] = mapped_column(CITEXT)
+    title: Mapped[str | None] = mapped_column(CITEXT)
+    first_author: Mapped[str | None] = mapped_column(CITEXT)
     pmid: Mapped[int | None] = mapped_column(unique=True)
     reference: Mapped[str | None] = mapped_column(unique=True)
     doi: Mapped[str | None] = mapped_column(unique=True)

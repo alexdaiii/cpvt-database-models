@@ -23,6 +23,10 @@ from .variant_origins import (
     DatasetVariant,
     PublicationVariant,
 )
+from .variant_properties import (
+    VariantClinVarInfo,
+    ClinicalSignificance,
+)
 
 __all__ = [
     "SequenceVariantDb",
@@ -37,4 +41,6 @@ __all__ = [
     "VariantsDataset",
     "DatasetVariant",
     "PublicationVariant",
+    "VariantClinVarInfo",
+    "ClinicalSignificance",
 ]

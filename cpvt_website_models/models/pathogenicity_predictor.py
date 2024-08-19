@@ -5,9 +5,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from .variants import Variant
- 
+
 
 class PathogenicityPredictor(Base):
     __tablename__ = "pathogenicity_predictor"

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from .individual import Individual
 
 
@@ -14,7 +14,7 @@ class Treatment(Base):
     __tablename__ = "treatment"
 
     treatment_id: Mapped[int] = mapped_column(primary_key=True)
-    treatment_name: Mapped[CITEXT] = mapped_column(CITEXT, unique=True)
+    treatment_name: Mapped[str] = mapped_column(CITEXT, unique=True)
 
     individuals: Mapped[Optional[list["TreatmentRecord"]]] = relationship(
         "TreatmentRecord",

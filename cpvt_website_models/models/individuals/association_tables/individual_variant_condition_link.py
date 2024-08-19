@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, relationship, mapped_column
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from .individual_variants import IndividualVariant
     from .individual_condition import IndividualCondition
 

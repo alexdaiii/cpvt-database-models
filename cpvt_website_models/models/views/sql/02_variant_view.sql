@@ -221,7 +221,7 @@ FROM variant v
                    ON v.variant_id = vci.variant_id
          LEFT JOIN variant_dataset vd
                    ON v.variant_id = vd.variant_id
-         LEFT JOIN variant_num_individuals_mv vni
+         LEFT JOIN variant_num_individuals_v vni
                    ON v.variant_id = vni.variant_id
          LEFT JOIN clinical_significance cs
                    ON v.clinical_significance_id = cs.clinical_significance_id

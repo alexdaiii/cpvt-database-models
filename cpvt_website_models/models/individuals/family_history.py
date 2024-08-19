@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from cpvt_website_models.models.conditions import Condition
     from cpvt_website_models.models.individuals.individual import Individual
     from .family_history_kin import \

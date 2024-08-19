@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cpvt_website_models.database.base import Base
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from .individuals import FamilyHistoryRecord, IndividualCondition
     from .variants import ClinVarVariantLinkedCondition
 
@@ -17,7 +17,7 @@ class Condition(Base):
     condition_id: Mapped[int] = mapped_column(
         primary_key=True, comment="Primary key for the health_state table"
     )
-    condition: Mapped[CITEXT] = mapped_column(
+    condition: Mapped[str] = mapped_column(
         CITEXT,
         unique=True,
     )
@@ -65,7 +65,7 @@ class ConditionSynonym(Base):
         comment="The condition that the synonym is for",
         index=True,
     )
-    synonym: Mapped[CITEXT] = mapped_column(
+    synonym: Mapped[str] = mapped_column(
         CITEXT,
     )
 

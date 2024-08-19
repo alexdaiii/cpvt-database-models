@@ -13,6 +13,7 @@ from .family_history_kin import (
 from .individual import (
     Individual,
     IndividualSex,
+    IndividualOriginalExcelRow,
     IndividualToPublication,
 )
 from .treatments import (
@@ -31,6 +32,7 @@ __all__ = [
     "FamilyMemberHistory",
     "Individual",
     "IndividualSex",
+    "IndividualOriginalExcelRow",
     "IndividualToPublication",
     "Treatment",
     "TreatmentRecord",
