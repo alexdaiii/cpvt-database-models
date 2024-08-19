@@ -7,8 +7,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:  # pragma: no cover
-    from cpvt_website_models.models.pathogenicity_predictor import \
-        PathogenicityPrediction
+    from cpvt_website_models.models.pathogenicity_predictor import (
+        PathogenicityPrediction,
+    )
     from cpvt_website_models.models.individuals import IndividualVariant
     from .variant_properties import ClinicalSignificance, VariantClinVarInfo
     from .variant_origins import DatasetVariant, PublicationVariant
@@ -27,9 +28,9 @@ class Variant(Base):
         nullable=False,
         default=False,
         comment="Whether the HGVS string is NOT parsable. "
-                "A parsable HGVS string is one that can be made into a "
-                "SequenceVariant (in the sequence_variant table). If this is true, "
-                "then the string is invalid and not parsable.",
+        "A parsable HGVS string is one that can be made into a "
+        "SequenceVariant (in the sequence_variant table). If this is true, "
+        "then the string is invalid and not parsable.",
     )
 
     clinical_significance_id: Mapped[int | None] = mapped_column(
@@ -59,9 +60,7 @@ class Variant(Base):
         "SequenceVariantDb",
         back_populates="variant",
     )
-    clinical_significance: Mapped[
-        Optional["ClinicalSignificance"]
-    ] = relationship(
+    clinical_significance: Mapped[Optional["ClinicalSignificance"]] = relationship(
         "ClinicalSignificance",
         back_populates="variants",
     )
@@ -79,11 +78,11 @@ class Variant(Base):
     )
 
     # No category
-    clinvar_linked_conditions: Mapped[
-        list["ClinVarVariantLinkedCondition"]
-    ] = relationship(
-        "ClinVarVariantLinkedCondition",
-        back_populates="variant",
+    clinvar_linked_conditions: Mapped[list["ClinVarVariantLinkedCondition"]] = (
+        relationship(
+            "ClinVarVariantLinkedCondition",
+            back_populates="variant",
+        )
     )
 
     # Predictions

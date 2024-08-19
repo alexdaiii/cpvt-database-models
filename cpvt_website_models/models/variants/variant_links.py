@@ -33,8 +33,7 @@ class ClinVarVariantLinkedCondition(Base):
 
     __table_args__ = (
         {
-            "comment": "A record that ClinVar has linked a variant "
-                       "to a condition",
+            "comment": "A record that ClinVar has linked a variant " "to a condition",
         },
     )
 

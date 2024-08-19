@@ -2,23 +2,27 @@ import pytest
 import pytest_asyncio
 from sqlalchemy import text, Connection
 from testcontainers.postgres import PostgresContainer
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, \
-    AsyncSession, AsyncConnection, async_sessionmaker
+from sqlalchemy.ext.asyncio import (
+    create_async_engine,
+    AsyncEngine,
+    AsyncSession,
+    AsyncConnection,
+    async_sessionmaker,
+)
 
 
 @pytest.fixture(scope="module")
 def get_container() -> PostgresContainer:
     with PostgresContainer("postgres:16", driver="psycopg_async") as postgres:
         print(
-            f"Successfully started postgres container: {postgres.get_connection_url()}")
+            f"Successfully started postgres container: {postgres.get_connection_url()}"
+        )
         yield postgres
 
 
 @pytest.fixture(scope="module")
 def get_engine(get_container: PostgresContainer) -> AsyncEngine:
-    asyncio_engine = create_async_engine(
-        get_container.get_connection_url(), echo=True
-    )
+    asyncio_engine = create_async_engine(get_container.get_connection_url(), echo=True)
 
     yield asyncio_engine
 

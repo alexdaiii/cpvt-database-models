@@ -59,7 +59,7 @@ class IndividualVariantConditionLink(Base):
         ),
         {
             "comment": "A record that an individual has a variant that is "
-                       "linked to one of their recorded conditions",
+            "linked to one of their recorded conditions",
         },
     )
 

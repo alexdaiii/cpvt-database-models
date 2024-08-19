@@ -9,8 +9,7 @@ from cpvt_website_models.database.base import Base
 if TYPE_CHECKING:  # pragma: no cover
     from cpvt_website_models.models.variants.variant import Variant
     from cpvt_website_models.models.individuals.individual import Individual
-    from .individual_variant_condition_link import \
-        IndividualVariantConditionLink
+    from .individual_variant_condition_link import IndividualVariantConditionLink
 
 
 class VariantInheritance(Base):
@@ -41,8 +40,7 @@ class Zygosity(Base):
     )
 
     __table_args__ = {
-        "comment": "Is the mutation on the individual heterozygous or "
-                   "homozygous",
+        "comment": "Is the mutation on the individual heterozygous or " "homozygous",
     }
 
 
@@ -78,9 +76,7 @@ class IndividualVariant(Base):
     )
 
     # Links to Variant, and Individual
-    variant: Mapped["Variant"] = relationship(
-        "Variant", back_populates="individuals"
-    )
+    variant: Mapped["Variant"] = relationship("Variant", back_populates="individuals")
     individual: Mapped["Individual"] = relationship(
         "Individual", back_populates="variants"
     )

@@ -37,9 +37,7 @@ class TreatmentRecord(Base):
     treatment_id: Mapped[int] = mapped_column(
         ForeignKey("treatment.treatment_id"), primary_key=True, index=True
     )
-    treatment_taken: Mapped[bool] = mapped_column(
-        comment="Was the treatment taken?"
-    )
+    treatment_taken: Mapped[bool] = mapped_column(comment="Was the treatment taken?")
     effective: Mapped[bool | None] = mapped_column(
         comment="Was the treatment effective?"
     )

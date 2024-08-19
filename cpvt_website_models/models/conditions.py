@@ -33,17 +33,17 @@ class Condition(Base):
         "IndividualCondition",
         back_populates="condition",
     )
-    family_history_records: Mapped[
-        Optional[list["FamilyHistoryRecord"]]
-    ] = relationship(
-        "FamilyHistoryRecord",
-        back_populates="condition",
+    family_history_records: Mapped[Optional[list["FamilyHistoryRecord"]]] = (
+        relationship(
+            "FamilyHistoryRecord",
+            back_populates="condition",
+        )
     )
-    clinvar_linked_variants: Mapped[
-        Optional[list["ClinVarVariantLinkedCondition"]]
-    ] = relationship(
-        "ClinVarVariantLinkedCondition",
-        back_populates="condition",
+    clinvar_linked_variants: Mapped[Optional[list["ClinVarVariantLinkedCondition"]]] = (
+        relationship(
+            "ClinVarVariantLinkedCondition",
+            back_populates="condition",
+        )
     )
 
     __table_args__ = ()

@@ -22,8 +22,7 @@ class VariantClinVarInfo(Base):
     )
     variation_clinvar_id: Mapped[int] = mapped_column(
         unique=True,
-        comment="Variation ID from ClinVar. "
-                "Used to link to the ClinVar website",
+        comment="Variation ID from ClinVar. " "Used to link to the ClinVar website",
     )
 
     variant: Mapped["Variant"] = relationship(

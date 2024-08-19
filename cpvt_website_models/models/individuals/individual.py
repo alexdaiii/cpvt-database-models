@@ -106,12 +106,13 @@ class IndividualToPublication(Base):
     )
 
     __table_args__ = (
-        {
-            "comment": "Many-to-many relationship between individual "
-                       "and publication"
-        },
+        {"comment": "Many-to-many relationship between individual " "and publication"},
     )
 
 
-__all__ = ["Individual", "IndividualSex", "IndividualToPublication",
-           "IndividualOriginalExcelRow"]
+__all__ = [
+    "Individual",
+    "IndividualSex",
+    "IndividualToPublication",
+    "IndividualOriginalExcelRow",
+]

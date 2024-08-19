@@ -52,7 +52,7 @@ class Structure(Base):
         ForeignKey("structure_root.structure_root_id"),
         index=True,
         comment="The root structure for this structure. WARNING: There is no "
-                "check that this root is actually a root of the tree.",
+        "check that this root is actually a root of the tree.",
     )
     residue_span: Mapped[list[Range[int]]] = mapped_column(INT4MULTIRANGE)
 

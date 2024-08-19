@@ -1,6 +1,7 @@
 """
 The SQLAlchemy models for the CPVT website.
 """
+
 from .individuals import (
     IndividualCondition,
     VariantInheritance,

@@ -8,8 +8,7 @@ from cpvt_website_models.database.base import Base
 if TYPE_CHECKING:  # pragma: no cover
     from cpvt_website_models.models.conditions import Condition
     from cpvt_website_models.models.individuals.individual import Individual
-    from .family_history_kin import \
-        FamilyMemberHistory
+    from .family_history_kin import FamilyMemberHistory
 
 
 class FamilyHistoryRecord(Base):
@@ -18,16 +17,14 @@ class FamilyHistoryRecord(Base):
     family_history_record_id: Mapped[int] = mapped_column(
         primary_key=True,
     )
-    individual_id: Mapped[int] = mapped_column(
-        ForeignKey("individual.individual_id")
-    )
+    individual_id: Mapped[int] = mapped_column(ForeignKey("individual.individual_id"))
     condition_id: Mapped[int] = mapped_column(
         ForeignKey("condition.condition_id"), index=True
     )
     num_family_members: Mapped[int | None] = mapped_column(
         comment="The number of family members with the condition. "
-                "If this number is 0, then no family members have "
-                "the condition. Recorded as number if the actual kinship is not known."
+        "If this number is 0, then no family members have "
+        "the condition. Recorded as number if the actual kinship is not known."
     )
 
     # Relationships

@@ -5,6 +5,7 @@ Revises: c5d04cc55476
 Create Date: 2024-04-19 18:48:13.953125
 
 """
+
 from typing import Sequence, Union
 
 from alembic import op
@@ -49,9 +50,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(
             ["protein_consequence_id"],
             ["sequence_variant.sequence_variant_id"],
-            name=op.f(
-                "fk_protein_consequence_protein_consequence_id_sequence_variant"
-            ),
+            name=op.f("fk_protein_consequence_protein_consequence_id_sequence_variant"),
         ),
         sa.PrimaryKeyConstraint(
             "protein_consequence_id", name=op.f("pk_protein_consequence")

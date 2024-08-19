@@ -1,6 +1,7 @@
 """
 Individual Kin's family history record
 """
+
 from typing import TYPE_CHECKING
 
 from sqlalchemy import ForeignKey

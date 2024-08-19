@@ -1,6 +1,7 @@
 """
 Publication(s) or dataset(s) that a variant is found in
 """
+
 from typing import TYPE_CHECKING
 
 from sqlalchemy import ForeignKey

@@ -16,8 +16,7 @@ def get_sql_files():
 
     sql_files = []
 
-    for root, _, files in os.walk(
-            os.path.join(os.path.dirname(__file__), "sql")):
+    for root, _, files in os.walk(os.path.join(os.path.dirname(__file__), "sql")):
         for file in sorted(files):
             if file.endswith(".sql"):
                 sql_files.append(os.path.join(root, file))

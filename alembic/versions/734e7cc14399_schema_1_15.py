@@ -5,6 +5,7 @@ Revises: 4de7ec4f7f03
 Create Date: 2024-04-29 20:41:34.625254
 
 """
+
 from typing import Sequence, Union
 
 from alembic import op
@@ -23,9 +24,7 @@ def upgrade() -> None:
     op.create_table(
         "kv_store",
         sa.Column("key", sa.String(), nullable=False),
-        sa.Column(
-            "value", postgresql.JSONB(astext_type=sa.Text()), nullable=False
-        ),
+        sa.Column("value", postgresql.JSONB(astext_type=sa.Text()), nullable=False),
         sa.Column(
             "created_at",
             sa.DateTime(timezone=True),

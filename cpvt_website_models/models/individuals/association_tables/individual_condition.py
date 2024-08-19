@@ -7,8 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_website_models.database.base import Base
 
 if TYPE_CHECKING:  # pragma: no cover
-    from .individual_variant_condition_link import \
-        IndividualVariantConditionLink
+    from .individual_variant_condition_link import IndividualVariantConditionLink
     from cpvt_website_models.models.individuals.individual import Individual
     from cpvt_website_models.models.conditions import Condition
 
@@ -40,17 +39,17 @@ class IndividualCondition(Base):
     )
     age_of_onset: Mapped[float | None] = mapped_column(
         comment="The age in years, when a patient first started experiencing "
-                "this condition",
+        "this condition",
         index=True,
     )
     age_of_presentation: Mapped[float | None] = mapped_column(
         comment="The age in years, when a person first presented this condition "
-                "to a healthcare professional",
+        "to a healthcare professional",
         index=True,
     )
     onset_symptoms: Mapped[str | None] = mapped_column(
         comment="The symptoms that the patient experienced when they first "
-                "started experiencing this condition"
+        "started experiencing this condition"
     )
 
     # -- Relationships
@@ -81,7 +80,7 @@ class IndividualCondition(Base):
         ),
         {
             "comment": "An association table between individuals and conditions that represents"
-                       "a record that an individual has reported having this condition or not",
+            "a record that an individual has reported having this condition or not",
         },
     )
 

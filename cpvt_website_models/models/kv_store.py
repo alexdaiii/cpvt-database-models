@@ -20,7 +20,7 @@ class KVStore(Base):
         ),
         {
             "comment": "Key-Value store for storing arbitrary data and caching"
-                       " API responses without needing to spin up Redis",
+            " API responses without needing to spin up Redis",
         },
     )
 
