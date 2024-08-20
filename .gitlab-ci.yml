@@ -34,6 +34,7 @@ testing:
 building:
   stage: build
   needs: [ testing ]
+  image: docker.io/python:$DEFAULT_PYTHON
   script:
     - echo "Building the app"
     - poetry config repositories.gitlab ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi
