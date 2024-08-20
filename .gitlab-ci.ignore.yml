@@ -44,7 +44,9 @@ testing:
     when: always
     reports:
       junit: report.xml
-  coverage: '/TOTAL.+ ([0-9]{1,3}%)/'
+  coverage: '/TOTAL.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
+  when:
+    - if: $CI_PIPELINE_SOURCE == "push"
 
 
 building:
@@ -61,5 +63,5 @@ building:
     - echo "Publishing the app done"
   # only run if the branch is default branch and the commit is tagged
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG'
-
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_TAG'
