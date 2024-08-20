@@ -8,10 +8,10 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.dialects.postgresql import CITEXT
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from cpvt_website_models.database.base import Base
+from cpvt_database_models.database.base import Base
 
 if TYPE_CHECKING:  # pragma: no cover
-    from cpvt_website_models.models.publication import Publication
+    from cpvt_database_models.models.publication import Publication
     from .variant import Variant
 
 

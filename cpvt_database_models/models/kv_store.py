@@ -2,7 +2,7 @@ from sqlalchemy import Index
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import mapped_column, Mapped
 
-from cpvt_website_models.database.base import Base
+from cpvt_database_models.database.base import Base
 
 
 class KVStore(Base):

@@ -7,10 +7,10 @@ from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from cpvt_website_models.database.base import Base
+from cpvt_database_models.database.base import Base
 
 if TYPE_CHECKING:  # pragma: no cover
-    from cpvt_website_models.models.conditions import Condition
+    from cpvt_database_models.models.conditions import Condition
     from .variant import Variant
 
 

@@ -50,8 +50,8 @@ async def setup_session(get_conn: AsyncConnection) -> AsyncConnection:
     """
 
     def _add_models(_conn: Connection):
-        from cpvt_website_models import models  # noqa: F401
-        from cpvt_website_models.database import BaseBase
+        from cpvt_database_models import models  # noqa: F401
+        from cpvt_database_models.database import BaseBase
 
         # create the uta schema
         _conn.execute(text("CREATE SCHEMA IF NOT EXISTS uta;"))

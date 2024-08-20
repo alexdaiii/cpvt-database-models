@@ -12,8 +12,8 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import mapped_column, relationship, Mapped
 
-from cpvt_website_models.database import BaseBase
-from cpvt_website_models.models import (
+from cpvt_database_models.database import BaseBase
+from cpvt_database_models.models import (
     Individual,
     IndividualSex,
     Publication,

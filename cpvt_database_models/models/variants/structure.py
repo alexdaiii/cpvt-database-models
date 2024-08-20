@@ -2,7 +2,7 @@ from sqlalchemy import CheckConstraint, ForeignKey, Index
 from sqlalchemy.dialects.postgresql import INT4MULTIRANGE, Range
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from cpvt_website_models.database.base import Base
+from cpvt_database_models.database.base import Base
 
 
 class StructureRoot(Base):

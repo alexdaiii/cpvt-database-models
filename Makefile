@@ -1,9 +1,10 @@
-.PHONY: coverage
+.PHONY: test alembic_migrate
 
-coverage:
-	pytest --cov=cpvt_website_models tests/ -n auto
+test:
+	# Run tests
+	tox run
+	# generate coverage html report
 	coverage html
-
 
 alembic_migrate:
 	alembic upgrade head

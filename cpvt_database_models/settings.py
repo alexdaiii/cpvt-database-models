@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     postgresql_schema: str = "public"
     postgresql_port: int = 5432
 
-    @computed_field
+    @computed_field  # type: ignore
     @property
     def postgresql_dsn(self) -> str:
         return f"{self.driver}://{self.postgresql_username}:{self.postgresql_password}@{self.postgresql_host}:{self.postgresql_port}/{self.postgresql_database}"

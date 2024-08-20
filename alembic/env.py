@@ -15,9 +15,9 @@ from alembic import context
 # from app_v2 import models  # noqa: F401, F403
 
 
-from cpvt_website_models.database.base import Base
-from cpvt_website_models.settings import get_settings
-from cpvt_website_models import models  # noqa: F401, F403
+from cpvt_database_models.database.base import Base
+from cpvt_database_models.settings import get_settings
+from cpvt_database_models import models  # noqa: F401, F403
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

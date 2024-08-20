@@ -2,7 +2,7 @@ import pytest
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from cpvt_website_models.models.views import add_views_pg
+from cpvt_database_models.models.views import add_views_pg
 
 
 @pytest.fixture

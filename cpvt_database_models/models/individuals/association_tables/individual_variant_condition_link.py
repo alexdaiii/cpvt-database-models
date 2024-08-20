@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKeyConstraint
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 
-from cpvt_website_models.database.base import Base
+from cpvt_database_models.database.base import Base
 
 if TYPE_CHECKING:  # pragma: no cover
     from .individual_variants import IndividualVariant

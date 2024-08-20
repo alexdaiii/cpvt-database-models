@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy.orm import Mapped, mapped_column
 
-from cpvt_website_models.database.base import BaseBase
+from cpvt_database_models.database.base import BaseBase
 
 
 class TranscriptUta(BaseBase):

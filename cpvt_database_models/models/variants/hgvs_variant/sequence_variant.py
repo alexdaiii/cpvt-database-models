@@ -1,5 +1,5 @@
 import re
-from typing import TYPE_CHECKING, Literal, Any, Callable
+from typing import TYPE_CHECKING, Literal, Any, Callable, cast
 
 from hgvs.easy import parser
 from hgvs.location import (
@@ -17,11 +17,11 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import INT4RANGE, Range, CITEXT
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from cpvt_website_models.database.base import Base
+from cpvt_database_models.database.base import Base
 from Bio.SeqUtils import seq1
 
 if TYPE_CHECKING:  # pragma: no cover
-    from cpvt_website_models.models import Variant
+    from cpvt_database_models.models import Variant
 
 
 # use this dictionary to map the molecular consequence to the id
@@ -47,7 +47,7 @@ _molecular_consequence_dict = edit_type_ids()
 ARBITRARY_MAX_VARCHAR_LENGTH = 2048
 
 
-def strip_nan(any_dict: dict, *, ignore_keys: set[str] = None):
+def strip_nan(any_dict: dict, *, ignore_keys: set[str] | None = None):
     if ignore_keys is None:
         ignore_keys = set()
 
@@ -121,7 +121,7 @@ class SequenceVariantDb(
             )
             self._add_edit_info(variant_g, g_args, "g")
 
-        c_args = {}
+        c_args: dict = {}
 
         if variant_c is not None:
             c_args = {
@@ -202,11 +202,17 @@ class SequenceVariantDb(
 
     def _determine_molecular_consequence_id(
         self, grammar: Callable[[Any], _GrammarWrapper] | None, hgvs_string: str
-    ) -> str:
+    ) -> int:
         """
         Get the molecular consequence of the sequence variant
         """
         variant_no_accn = hgvs_string.split(":", 1)[1]
+        default_edit_type = "Unknown"
+
+        if grammar is None:
+            return cast(
+                int, self._molecular_consequence_dict.get(default_edit_type, 13)
+            )
 
         try:
             edit_type = grammar(variant_no_accn).typed_posedit()[1]
@@ -215,9 +221,9 @@ class SequenceVariantDb(
                 f"Error parsing molecular consequence {variant_no_accn}. Setting to 'Unknown'"
             )
             # some error occurred, set to unknown
-            edit_type = "Unknown"
+            edit_type = default_edit_type
 
-        return self._molecular_consequence_dict.get(edit_type, 13)
+        return cast(int, self._molecular_consequence_dict.get(edit_type, 13))  #
 
     @staticmethod
     def _remove_accn(variant):

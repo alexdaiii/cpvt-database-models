@@ -6,7 +6,7 @@ import sqlparse
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 
-from cpvt_website_models.settings import get_settings
+from cpvt_database_models.settings import get_settings
 
 
 def get_sql_files():
