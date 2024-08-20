@@ -3,6 +3,12 @@
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
   DEFAULT_PYTHON: "3.12"
+  # Instruct Testcontainers to use the daemon of DinD, use port 2375 for non-tls connections.
+  DOCKER_HOST: "tcp://docker:2375"
+  # Instruct Docker not to start over TLS.
+  DOCKER_TLS_CERTDIR: ""
+  # Improve performance with overlayfs.
+  DOCKER_DRIVER: overlay2
 
 
 # https://pip.pypa.io/en/stable/topics/caching/
@@ -14,6 +20,11 @@ stages:
   - test
   - build
 
+# DinD service is required for Testcontainers
+services:
+  - name: docker:dind
+    # explicitly disable tls to avoid docker startup interruption
+    command: [ "--tls=false" ]
 
 before_script:
   - pip install poetry
