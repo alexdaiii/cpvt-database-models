@@ -586,13 +586,13 @@ files = [
 
 [[package]]
 name = "importlib-metadata"
-version = "8.3.0"
+version = "8.4.0"
 description = "Read metadata from Python packages"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "importlib_metadata-8.3.0-py3-none-any.whl", hash = "sha256:42817a4a0be5845d22c6e212db66a94ad261e2318d80b3e0d363894a79df2b67"},
-    {file = "importlib_metadata-8.3.0.tar.gz", hash = "sha256:9c8fa6e8ea0f9516ad5c8db9246a731c948193c7754d3babb0114a05b27dd364"},
+    {file = "importlib_metadata-8.4.0-py3-none-any.whl", hash = "sha256:66f342cc6ac9818fc6ff340576acd24d65ba0b3efabb2b4ac08b598965a4a2f1"},
+    {file = "importlib_metadata-8.4.0.tar.gz", hash = "sha256:9a547d3bc3608b025f93d403fdd1aae741c24fbb8314df4b155675742ce303c5"},
 ]
 
 [package.dependencies]
@@ -1831,7 +1831,11 @@ files = [
 doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-lint"]
 test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", "jaraco.test", "more-itertools", "pytest (>=6,!=8.1.*)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-ignore-flaky", "pytest-mypy", "pytest-ruff (>=0.2.1)"]
 
+[extras]
+add-views = ["pydantic-settings", "sqlparse"]
+with-driver = ["psycopg"]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10, <3.13"
-content-hash = "cfc71e96110ec2c2f510652857bdef0eb4d8422c377febe26b6abd2d1e0d96a0"
+content-hash = "9ea0734722be9ecdd338193d4a3a8ce901fdf6ab864474644e4ba3e6075ca2a5"

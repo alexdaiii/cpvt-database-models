@@ -1,0 +1,48 @@
+# Change pip's cache directory to be inside the project directory since we can
+# only cache local items.
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  DEFAULT_PYTHON: "3.12"
+
+
+# https://pip.pypa.io/en/stable/topics/caching/
+cache:
+  paths:
+    - .cache/pip
+
+
+before_script:
+  - pip install poetry
+  - poetry install --all-extras --with dev
+  - source `poetry env info --path`/bin/activate
+
+
+testing:
+  stage: test
+  image: docker.io/python:$PYTHON_VERSIONS
+  parallel:
+    matrix:
+      - PYTHON_VERSIONS: [ "3.10", "3.11", "3.12" ]
+  script:
+    - poetry run pytest --junitxml=report.xml
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+
+
+building:
+  stage: build
+  needs: [ testing ]
+  script:
+    - echo "Building the app"
+    - poetry config repositories.gitlab ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi
+    - echo "Repository gitlab configured ..."
+    - poetry build
+    - echo "Building the app done"
+    - poetry publish --repository gitlab -u gitlab-ci-token -p $CI_JOB_TOKEN
+    - echo "Publishing the app done"
+  # only run if the branch is default branch and the commit is tagged
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG'
+
