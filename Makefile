@@ -1,10 +1,10 @@
 .PHONY: test alembic_migrate
 
+include .env
+
 test:
-	# Run tests
-	tox run
-	# generate coverage html report
-	coverage html
+	# Run tests using simulated github actions environment
+	act --secret-file .env
 
 alembic_migrate:
 	alembic upgrade head
