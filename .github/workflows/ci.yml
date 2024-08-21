@@ -1,20 +1,10 @@
 name: Test
 
-on:
-  push:
-    branches: [ main ]
-    tags:
-      - '**'
-  pull_request: { }
-
-env:
-  DEFAULT_PYTHON: '3.12'
-
+on: [ push ]
 
 jobs:
 
   mypy:
-    name: mypy ${{ env.DEFAULT_PYTHON }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,14 +12,13 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          python-version: ${{ env.DEFAULT_PYTHON }}
+          python-version: 3.12
 
       - name: Run mypy
         run: poetry run mypy cpvt_database_models
 
 
   lint:
-    name: lint ${{ env.DEFAULT_PYTHON }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,7 +26,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          python-version: ${{ env.DEFAULT_PYTHON }}
+          python-version: 3.12
 
       - name: Run lint
         run: poetry run ruff check cpvt_database_models

@@ -35,7 +35,7 @@ runs:
     - name: Cache poetry installation
       uses: actions/cache@v4
       with:
-        key: '${{ runner.os }}-py-${{ input.python-version }}-poetry-${{ fromJson(steps.get_latest_poetry_version.outputs.data).tag_name }}-${{ inputs.poetry-cache-suffix }}'
+        key: '${{ runner.os }}-py-${{ inputs.python-version }}-poetry-${{ fromJson(steps.get_latest_poetry_version.outputs.data).tag_name }}-${{ inputs.poetry-cache-suffix }}'
         path: '~/.local'
 
     - name: Install Poetry
@@ -48,7 +48,7 @@ runs:
     - name: Cache deps depending on hash of poetry.lock
       uses: actions/cache@v4
       with:
-        key: "${{ runner.os }}-py-${{ input.python-version }}-poetry-${{ hashFiles('**/poetry.lock') }}-${{ inputs.poetry-lock-suffix }}"
+        key: "${{ runner.os }}-py-${{ inputs.python-version }}-poetry-${{ hashFiles('**/poetry.lock') }}-${{ inputs.poetry-lock-suffix }}"
         path: '.venv'
 
     - name: Install all dependencies
