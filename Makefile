@@ -4,7 +4,7 @@ include .env
 
 test:
 	# Run tests using simulated github actions environment
-	act --secret-file .env
+	act
 
 alembic_migrate:
 	alembic upgrade head

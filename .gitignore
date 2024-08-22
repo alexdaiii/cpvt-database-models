@@ -2,6 +2,7 @@
 data
 output
 
+.secrets
 report.xml
 
 ### JetBrains template
