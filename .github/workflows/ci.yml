@@ -107,21 +107,25 @@ jobs:
         with:
           jobs: ${{ toJSON(needs) }}
 
-#  release-gitlab:
-#    needs: [ check ]
-#    if: needs.check.outputs.result == 'success' && startsWith(github.ref, 'refs/tags/')
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - uses: ./.github/actions/setup
-#        with:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          python-version: '3.12'
-#
-#      - name: Publish the app
-#        run: |
-#          poetry config repositories.gitlab ${{ secrets.GITLAB_URL }}/projects/${{ secrets.GITLAB_PROJECT_ID }}/packages/pypi
-#          echo "Repository gitlab configured ..."
-#          poetry publish --repository gitlab -u gitlab-ci-token -p ${{ secrets.GITLAB_TOKEN }}
+  release-gitlab:
+    needs: [ check ]
+    if: needs.check.outputs.result == 'success' && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          python-version: '3.12'
+
+      - name: Build the app
+        run: poetry build
+
+      - name: Publish to GitLab
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: ${{ secrets.GITLAB_USER }}
+          password: ${{ secrets.GITLAB_CI_TOKEN }}
+          repository-url: 'https://gitlab.com/api/v4/projects/${{ secrets.GITLAB_PROJECT_ID }}/packages/pypi'
 
