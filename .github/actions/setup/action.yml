@@ -1,0 +1,58 @@
+inputs:
+  python-version:
+    description: 'The version of Python to use'
+    required: true
+  GITHUB_TOKEN:
+    description: 'User token for accessing the GitHub API. Can be passed in using {{ secrets.GITHUB_TOKEN }}'
+    required: true
+  poetry-cache-suffix:
+    description: 'The suffix to use for the cache key'
+    required: false
+    default: ''
+  poetry-lock-suffix:
+    description: 'The suffix to use for the cache key'
+    required: false
+    default: ''
+runs:
+  using: composite
+  steps:
+    - name: Set up Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Obtain the name of the latest version of Poetry available
+      uses: octokit/request-action@v2.x
+      id: get_latest_poetry_version
+      with:
+        route: GET /repos/python-poetry/poetry/releases/latest
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+
+    - run: "echo Latest version of Poetry is '${{ fromJson(steps.get_latest_poetry_version.outputs.data).tag_name }}'"
+      shell: bash
+
+    - name: Cache poetry installation
+      uses: actions/cache@v4
+      with:
+        key: '${{ runner.os }}-py-${{ inputs.python-version }}-poetry-${{ fromJson(steps.get_latest_poetry_version.outputs.data).tag_name }}-${{ inputs.poetry-cache-suffix }}'
+        path: '~/.local'
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: ${{ fromJson(steps.get_latest_poetry_version.outputs.data).tag_name }}
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+
+    - name: Cache deps depending on hash of poetry.lock
+      uses: actions/cache@v4
+      with:
+        key: "${{ runner.os }}-py-${{ inputs.python-version }}-poetry-${{ hashFiles('**/poetry.lock') }}-${{ inputs.poetry-lock-suffix }}"
+        path: '.venv'
+
+    - name: Install all dependencies
+      run: poetry install --no-root --all-extras --no-interaction --with dev
+      shell: bash
+      if: steps.cache-deps.outputs.cache-hit != 'true'
+

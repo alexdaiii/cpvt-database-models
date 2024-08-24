@@ -1,10 +1,11 @@
-"""schema_1.14
+"""schema_0.1.14
 
 Revision ID: c5d04cc55476
 Revises: 1f355f80cd00
 Create Date: 2024-04-19 16:03:37.546546
 
 """
+
 from typing import Sequence, Union
 
 from alembic import op
@@ -23,9 +24,7 @@ def upgrade() -> None:
     op.create_table(
         "clinical_significance",
         sa.Column("clinical_significance_id", sa.Integer(), nullable=False),
-        sa.Column(
-            "clinical_significance", postgresql.CITEXT(), nullable=False
-        ),
+        sa.Column("clinical_significance", postgresql.CITEXT(), nullable=False),
         sa.Column(
             "created_at",
             sa.DateTime(timezone=True),
@@ -108,9 +107,7 @@ def upgrade() -> None:
             server_default=sa.text("now()"),
             nullable=False,
         ),
-        sa.PrimaryKeyConstraint(
-            "individual_sex_id", name=op.f("pk_individual_sex")
-        ),
+        sa.PrimaryKeyConstraint("individual_sex_id", name=op.f("pk_individual_sex")),
         sa.UniqueConstraint("value", name=op.f("uq_individual_sex_value")),
     )
     op.create_table(
@@ -134,9 +131,7 @@ def upgrade() -> None:
             server_default=sa.text("now()"),
             nullable=False,
         ),
-        sa.PrimaryKeyConstraint(
-            "kinship_name_id", name=op.f("pk_kinship_name")
-        ),
+        sa.PrimaryKeyConstraint("kinship_name_id", name=op.f("pk_kinship_name")),
         sa.UniqueConstraint("name", name=op.f("uq_kinship_name_name")),
     )
     op.create_table(
@@ -158,9 +153,7 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint(
             "predictor_id", name=op.f("pk_pathogenicity_predictor")
         ),
-        sa.UniqueConstraint(
-            "model", name=op.f("uq_pathogenicity_predictor_model")
-        ),
+        sa.UniqueConstraint("model", name=op.f("uq_pathogenicity_predictor_model")),
         comment="Pathogenicity predictor models",
     )
     op.create_table(
@@ -199,9 +192,7 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("publication_id", name=op.f("pk_publication")),
         sa.UniqueConstraint("doi", name=op.f("uq_publication_doi")),
         sa.UniqueConstraint("pmid", name=op.f("uq_publication_pmid")),
-        sa.UniqueConstraint(
-            "reference", name=op.f("uq_publication_reference")
-        ),
+        sa.UniqueConstraint("reference", name=op.f("uq_publication_reference")),
     )
     op.create_table(
         "structure_root",
@@ -218,9 +209,7 @@ def upgrade() -> None:
             server_default=sa.text("now()"),
             nullable=False,
         ),
-        sa.PrimaryKeyConstraint(
-            "structure_root_id", name=op.f("pk_structure_root")
-        ),
+        sa.PrimaryKeyConstraint("structure_root_id", name=op.f("pk_structure_root")),
     )
     op.create_table(
         "treatment",
@@ -239,9 +228,7 @@ def upgrade() -> None:
             nullable=False,
         ),
         sa.PrimaryKeyConstraint("treatment_id", name=op.f("pk_treatment")),
-        sa.UniqueConstraint(
-            "treatment_name", name=op.f("uq_treatment_treatment_name")
-        ),
+        sa.UniqueConstraint("treatment_name", name=op.f("uq_treatment_treatment_name")),
         comment="Treatments that patients were given",
     )
     op.create_table(
@@ -287,9 +274,7 @@ def upgrade() -> None:
             server_default=sa.text("now()"),
             nullable=False,
         ),
-        sa.PrimaryKeyConstraint(
-            "dataset_id", name=op.f("pk_variants_dataset")
-        ),
+        sa.PrimaryKeyConstraint("dataset_id", name=op.f("pk_variants_dataset")),
         sa.UniqueConstraint("name", name=op.f("uq_variants_dataset_name")),
         comment="Information about a dataset of variants",
     )
@@ -818,9 +803,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(
             ["structure_root_id"],
             ["structure_root.structure_root_id"],
-            name=op.f(
-                "fk_structure_root_to_protein_structure_root_id_structure_root"
-            ),
+            name=op.f("fk_structure_root_to_protein_structure_root_id_structure_root"),
         ),
         sa.PrimaryKeyConstraint(
             "structure_root_id", name=op.f("pk_structure_root_to_protein")
@@ -947,9 +930,7 @@ def upgrade() -> None:
         ),
         sa.CheckConstraint(
             "age_of_presentation >= 0",
-            name=op.f(
-                "ck_individual_condition_age_of_presentation_not_negative"
-            ),
+            name=op.f("ck_individual_condition_age_of_presentation_not_negative"),
         ),
         sa.ForeignKeyConstraint(
             ["condition_id"],
@@ -1009,9 +990,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(
             ["individual_id"],
             ["individual.individual_id"],
-            name=op.f(
-                "fk_individual_original_excel_row_individual_id_individual"
-            ),
+            name=op.f("fk_individual_original_excel_row_individual_id_individual"),
         ),
         sa.PrimaryKeyConstraint(
             "individual_id", name=op.f("pk_individual_original_excel_row")
@@ -1042,9 +1021,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(
             ["publication_id"],
             ["publication.publication_id"],
-            name=op.f(
-                "fk_individual_to_publication_publication_id_publication"
-            ),
+            name=op.f("fk_individual_to_publication_publication_id_publication"),
         ),
         sa.PrimaryKeyConstraint(
             "individual_id",
@@ -1145,9 +1122,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(
             ["clinical_significance_id"],
             ["clinical_significance.clinical_significance_id"],
-            name=op.f(
-                "fk_variant_clinical_significance_id_clinical_significance"
-            ),
+            name=op.f("fk_variant_clinical_significance_id_clinical_significance"),
         ),
         sa.ForeignKeyConstraint(
             ["sequence_variant_id"],
@@ -1155,9 +1130,7 @@ def upgrade() -> None:
             name=op.f("fk_variant_sequence_variant_id_sequence_variant"),
         ),
         sa.PrimaryKeyConstraint("variant_id", name=op.f("pk_variant")),
-        sa.UniqueConstraint(
-            "hgvs_string", name=op.f("uq_variant_hgvs_string")
-        ),
+        sa.UniqueConstraint("hgvs_string", name=op.f("uq_variant_hgvs_string")),
     )
     op.create_index(
         op.f("ix_variant_clinical_significance_id"),
@@ -1190,16 +1163,12 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(
             ["condition_id"],
             ["condition.condition_id"],
-            name=op.f(
-                "fk_clinvar_variant_linked_condition_condition_id_condition"
-            ),
+            name=op.f("fk_clinvar_variant_linked_condition_condition_id_condition"),
         ),
         sa.ForeignKeyConstraint(
             ["variant_id"],
             ["variant.variant_id"],
-            name=op.f(
-                "fk_clinvar_variant_linked_condition_variant_id_variant"
-            ),
+            name=op.f("fk_clinvar_variant_linked_condition_variant_id_variant"),
         ),
         sa.PrimaryKeyConstraint(
             "variant_id",
@@ -1348,9 +1317,7 @@ def upgrade() -> None:
         ),
         sa.CheckConstraint(
             "prediction IS NOT NULL OR score IS NOT NULL",
-            name=op.f(
-                "ck_pathogenicity_prediction_prediction_or_score_not_null"
-            ),
+            name=op.f("ck_pathogenicity_prediction_prediction_or_score_not_null"),
         ),
         sa.ForeignKeyConstraint(
             ["predictor_id"],
@@ -1440,9 +1407,7 @@ def upgrade() -> None:
             ["variant.variant_id"],
             name=op.f("fk_variant_clinvar_info_variant_id_variant"),
         ),
-        sa.PrimaryKeyConstraint(
-            "variant_id", name=op.f("pk_variant_clinvar_info")
-        ),
+        sa.PrimaryKeyConstraint("variant_id", name=op.f("pk_variant_clinvar_info")),
         sa.UniqueConstraint(
             "variation_clinvar_id",
             name=op.f("uq_variant_clinvar_info_variation_clinvar_id"),
@@ -1468,9 +1433,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(
             ["dataset_id"],
             ["variants_dataset.dataset_id"],
-            name=op.f(
-                "fk_variants_dataset_to_variant_dataset_id_variants_dataset"
-            ),
+            name=op.f("fk_variants_dataset_to_variant_dataset_id_variants_dataset"),
         ),
         sa.ForeignKeyConstraint(
             ["variant_id"],
@@ -1596,9 +1559,7 @@ def downgrade() -> None:
     )
     op.drop_table("clinvar_variant_linked_condition")
     op.drop_index(op.f("ix_variant_sequence_variant_id"), table_name="variant")
-    op.drop_index(
-        op.f("ix_variant_clinical_significance_id"), table_name="variant"
-    )
+    op.drop_index(op.f("ix_variant_clinical_significance_id"), table_name="variant")
     op.drop_table("variant")
     op.drop_index(
         op.f("ix_treatment_record_treatment_id"), table_name="treatment_record"
@@ -1671,12 +1632,8 @@ def downgrade() -> None:
     op.drop_index(
         op.f("ix_sequence_variant_g_edit_type"), table_name="sequence_variant"
     )
-    op.drop_index(
-        op.f("ix_sequence_variant_g_edit_ref"), table_name="sequence_variant"
-    )
-    op.drop_index(
-        op.f("ix_sequence_variant_g_edit_alt"), table_name="sequence_variant"
-    )
+    op.drop_index(op.f("ix_sequence_variant_g_edit_ref"), table_name="sequence_variant")
+    op.drop_index(op.f("ix_sequence_variant_g_edit_alt"), table_name="sequence_variant")
     op.drop_index(
         op.f("ix_sequence_variant_c_reference_sequence_id"),
         table_name="sequence_variant",
@@ -1692,12 +1649,8 @@ def downgrade() -> None:
     op.drop_index(
         op.f("ix_sequence_variant_c_edit_type"), table_name="sequence_variant"
     )
-    op.drop_index(
-        op.f("ix_sequence_variant_c_edit_ref"), table_name="sequence_variant"
-    )
-    op.drop_index(
-        op.f("ix_sequence_variant_c_edit_alt"), table_name="sequence_variant"
-    )
+    op.drop_index(op.f("ix_sequence_variant_c_edit_ref"), table_name="sequence_variant")
+    op.drop_index(op.f("ix_sequence_variant_c_edit_alt"), table_name="sequence_variant")
     op.drop_index(
         "idx_sequence_variant_p_pos_interval",
         table_name="sequence_variant",
@@ -1714,9 +1667,7 @@ def downgrade() -> None:
         postgresql_using="gist",
     )
     op.drop_table("sequence_variant")
-    op.drop_index(
-        op.f("ix_individual_individual_sex_id"), table_name="individual"
-    )
+    op.drop_index(op.f("ix_individual_individual_sex_id"), table_name="individual")
     op.drop_table("individual")
     op.drop_index(
         op.f("ix_condition_synonym_condition_id"),
