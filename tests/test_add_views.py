@@ -1,3 +1,5 @@
+import sys
+
 import pytest
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -7,7 +9,7 @@ from cpvt_database_models.models.views import add_views_pg
 
 @pytest.fixture
 async def setup_views_db(
-    session: AsyncSession,
+        session: AsyncSession,
 ):
     await add_views_pg(session)
 
@@ -25,6 +27,16 @@ async def setup_views_db(
     ],
 )
 async def test_views_created(session: AsyncSession, setup_views_db, views: str):
-    result = (await session.execute(text(f"SELECT * FROM {views}"))).scalars().all()
+    result = (
+        await session.execute(text(f"SELECT * FROM {views}"))).scalars().all()
 
     assert result is not None
+
+
+async def test_execute_file_import_error(monkeypatch, session: AsyncSession):
+    from cpvt_database_models.models.views import add_views
+
+    monkeypatch.setitem(sys.modules, "sqlparse", None)
+
+    with pytest.raises(ImportError):
+        await add_views.execute_file(session, "None.sql")

@@ -2,11 +2,19 @@ import asyncio
 import os
 import time
 
-import sqlparse
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 
 from cpvt_database_models.settings import get_settings
+
+_ERROR_MESSAGE = (
+    "The cpvt_database_models add_views file requires that sqlparse and "
+    "the pydantic-settings libraries are installed.  In order to ensure these "
+    "are installed, please run the following commands:\n"
+    "'pip install cpvt_database_models[add_views] cpvt_database_models[with_settings] --index-url https://gitlab.com/api/v4/projects/60969577/packages/pypi/simple'\n"
+    "You will also need to have an async postgres driver installed such "
+    "as psycopg or asyncpg."
+)
 
 
 def get_sql_files():
@@ -16,7 +24,8 @@ def get_sql_files():
 
     sql_files = []
 
-    for root, _, files in os.walk(os.path.join(os.path.dirname(__file__), "sql")):
+    for root, _, files in os.walk(
+            os.path.join(os.path.dirname(__file__), "sql")):
         for file in sorted(files):
             if file.endswith(".sql"):
                 sql_files.append(os.path.join(root, file))
@@ -37,6 +46,11 @@ async def add_views_pg(session: AsyncSession):
 
 
 async def execute_file(session: AsyncSession, sql_file):
+    try:
+        import sqlparse
+    except ImportError as e:
+        raise ImportError(_ERROR_MESSAGE) from e
+
     # start a timer
     start_time = time.time()
 
