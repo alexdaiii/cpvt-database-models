@@ -51,7 +51,8 @@ def strip_nan(any_dict: dict, *, ignore_keys: set[str] | None = None):
     if ignore_keys is None:
         ignore_keys = set()
 
-    return {k: v for k, v in any_dict.items() if v is not None or k in ignore_keys}
+    return {k: v for k, v in any_dict.items() if
+            v is not None or k in ignore_keys}
 
 
 class EditType(Base):
@@ -64,7 +65,7 @@ class EditType(Base):
     __table_args__ = (
         {
             "comment": "What the mutation does at the molecular level - "
-            "e.g. missense, nonsense, frameshift, etc.",
+                       "e.g. missense, nonsense, frameshift, etc.",
         },
     )
 
@@ -81,16 +82,16 @@ class SequenceVariantDb(
     _molecular_consequence_dict = _molecular_consequence_dict
 
     def __init__(
-        self,
-        *,
-        variant_g: SequenceVariant | None = None,
-        variant_c: SequenceVariant | None = None,
-        variant_p: SequenceVariant | None = None,
-        reference_sequence_id_c: int | None = None,
-        reference_sequence_id_g: int | None = None,
-        reference_sequence_id_p: int | None = None,
-        grammar: Callable[[Any], _GrammarWrapper] | None = None,
-        **kwargs,
+            self,
+            *,
+            variant_g: SequenceVariant | None = None,
+            variant_c: SequenceVariant | None = None,
+            variant_p: SequenceVariant | None = None,
+            reference_sequence_id_c: int | None = None,
+            reference_sequence_id_g: int | None = None,
+            reference_sequence_id_p: int | None = None,
+            grammar: Callable[[Any], _GrammarWrapper] | None = None,
+            **kwargs,
     ):
         """
         Arguments for:
@@ -109,7 +110,8 @@ class SequenceVariantDb(
                         grammar, str(variant_g)
                     ),
                     "g_posedit_str": str(variant_g.posedit)
-                    if len(str(variant_g.posedit)) < ARBITRARY_MAX_VARCHAR_LENGTH
+                    if len(
+                        str(variant_g.posedit)) < ARBITRARY_MAX_VARCHAR_LENGTH
                     else None,
                     "g_pos_interval": Range(
                         variant_g.posedit.pos.start.base,
@@ -134,7 +136,10 @@ class SequenceVariantDb(
                     variant_c.posedit.pos.start.base,
                     variant_c.posedit.pos.end.base,
                     bounds="[]",
-                ),
+                )
+                if variant_c.posedit.pos.start.base
+                   <= variant_c.posedit.pos.end.base
+                else None,
                 "c_hgvs_string": str(variant_c),
             }
             # add start and end offsets if they exist
@@ -171,37 +176,40 @@ class SequenceVariantDb(
     def _add_edit_info(variant: SequenceVariant, all_args: dict, sv_type: str):
         # add edit information if the property exists
         if (
-            hasattr(variant.posedit.edit, "ref")
-            and variant.posedit.edit.ref is not None
-            and len(str(variant.posedit.edit.ref)) < ARBITRARY_MAX_VARCHAR_LENGTH
+                hasattr(variant.posedit.edit, "ref")
+                and variant.posedit.edit.ref is not None
+                and len(
+            str(variant.posedit.edit.ref)) < ARBITRARY_MAX_VARCHAR_LENGTH
         ):
             all_args[f"{sv_type}_edit_ref"] = variant.posedit.edit.ref
         if (
-            hasattr(variant.posedit.edit, "alt")
-            and variant.posedit.edit.alt is not None
-            and len(str(variant.posedit.edit.alt)) < ARBITRARY_MAX_VARCHAR_LENGTH
+                hasattr(variant.posedit.edit, "alt")
+                and variant.posedit.edit.alt is not None
+                and len(
+            str(variant.posedit.edit.alt)) < ARBITRARY_MAX_VARCHAR_LENGTH
         ):
             all_args[f"{sv_type}_edit_alt"] = variant.posedit.edit.alt
 
         if variant.type == "p":
             if (
-                hasattr(variant.posedit.pos.start, "aa")
-                and variant.posedit.pos.start is not None
+                    hasattr(variant.posedit.pos.start, "aa")
+                    and variant.posedit.pos.start is not None
             ):
                 all_args["p_start_aa"] = variant.posedit.pos.start.aa
             if (
-                hasattr(variant.posedit.pos.end, "aa")
-                and variant.posedit.pos.end is not None
+                    hasattr(variant.posedit.pos.end, "aa")
+                    and variant.posedit.pos.end is not None
             ):
                 all_args["p_end_aa"] = variant.posedit.pos.end.aa
             if (
-                hasattr(variant.posedit.edit, "init_met")
-                and variant.posedit.edit.init_met is not None
+                    hasattr(variant.posedit.edit, "init_met")
+                    and variant.posedit.edit.init_met is not None
             ):
                 all_args["p_edit_init_met"] = variant.posedit.edit.init_met
 
     def _determine_molecular_consequence_id(
-        self, grammar: Callable[[Any], _GrammarWrapper] | None, hgvs_string: str
+            self, grammar: Callable[[Any], _GrammarWrapper] | None,
+            hgvs_string: str
     ) -> int:
         """
         Get the molecular consequence of the sequence variant
@@ -230,7 +238,7 @@ class SequenceVariantDb(
         return variant.split(":", 1)[1]
 
     def sequence_variant(
-        self, *, hp: Parser | None = None, sv_type: Literal["g", "c", "p"]
+            self, *, hp: Parser | None = None, sv_type: Literal["g", "c", "p"]
     ) -> SequenceVariant | None:
         """
         Convert the sequence variant in the database to a SequenceVariant object
@@ -262,8 +270,8 @@ class SequenceVariantDb(
     g_reference_sequence_id: Mapped[int | None] = mapped_column(
         ForeignKey("uta.seq_anno.seq_anno_id"),
         comment="The reference sequence from the UTA database. "
-        "Foreign key to seq_anno.seq_anno_id, which contains the reference "
-        "sequence names.",
+                "Foreign key to seq_anno.seq_anno_id, which contains the reference "
+                "sequence names.",
         index=True,
     )
     g_edit_type: Mapped[int | None] = mapped_column(
@@ -277,7 +285,7 @@ class SequenceVariantDb(
     g_pos_interval: Mapped[Range[int] | None] = mapped_column(
         INT4RANGE,
         comment="From an hgvs PosEdit.pos object. This is the pos.start.base "
-        "and the pos.end.base values.",
+                "and the pos.end.base values.",
     )
     g_edit_ref: Mapped[str | None] = mapped_column(
         index=True, comment="From an hgvs Edit object. The edit.ref value."
@@ -294,8 +302,8 @@ class SequenceVariantDb(
     c_reference_sequence_id: Mapped[int | None] = mapped_column(
         ForeignKey("uta.seq_anno.seq_anno_id"),
         comment="The reference sequence from the UTA database. "
-        "Foreign key to seq_anno.seq_anno_id, which contains the reference "
-        "sequence names.",
+                "Foreign key to seq_anno.seq_anno_id, which contains the reference "
+                "sequence names.",
         index=True,
     )
     c_edit_type: Mapped[int | None] = mapped_column(
@@ -309,7 +317,7 @@ class SequenceVariantDb(
     c_pos_interval: Mapped[Range[int] | None] = mapped_column(
         INT4RANGE,
         comment="From an hgvs PosEdit.pos object. This is the pos.start.base "
-        "and the pos.end.base values.",
+                "and the pos.end.base values.",
     )
     c_start_offset: Mapped[int | None] = mapped_column(
         comment="For cDNA sequences intronic variants. Otherwise null."
@@ -332,8 +340,8 @@ class SequenceVariantDb(
     p_reference_sequence_id: Mapped[int | None] = mapped_column(
         ForeignKey("uta.seq_anno.seq_anno_id"),
         comment="The reference sequence from the UTA database. "
-        "Foreign key to seq_anno.seq_anno_id, which contains the reference "
-        "sequence names.",
+                "Foreign key to seq_anno.seq_anno_id, which contains the reference "
+                "sequence names.",
         index=True,
     )
     p_edit_type: Mapped[int | None] = mapped_column(
@@ -348,18 +356,18 @@ class SequenceVariantDb(
     p_pos_interval: Mapped[Range[int] | None] = mapped_column(
         INT4RANGE,
         comment="From an hgvs PosEdit.pos object. This is the pos.start.base "
-        "and the pos.end.base values.",
+                "and the pos.end.base values.",
     )
     # NO INDEXES for the following columns becausew
     # protein consequences are tricky for hgvs package - just search based on
     # the posedit_string or hgvs_string
     p_start_aa: Mapped[str | None] = mapped_column(
         comment="For protein sequences. The start amino acid. "
-        "Equivalent to edit.ref, for non protein sequences."
+                "Equivalent to edit.ref, for non protein sequences."
     )
     p_end_aa: Mapped[str | None] = mapped_column(
         comment="For protein sequences. The end amino acid."
-        "Equivalent to edit.alt, for non protein sequences."
+                "Equivalent to edit.alt, for non protein sequences."
     )
     p_edit_ref: Mapped[str | None] = mapped_column(
         comment="From an hgvs Edit object. The edit.ref value."
@@ -429,7 +437,7 @@ class SequenceVariantDb(
         ),
         {
             "comment": "A sequence variant parsed and validated by the python "
-            "or rust hgvs library.",
+                       "or rust hgvs library.",
         },
     )
 
@@ -447,10 +455,10 @@ class ProteinConsequence(Base):
     __tablename__ = "protein_consequence"
 
     def __init__(
-        self,
-        *,
-        sequence_variant: SequenceVariantDb | SequenceVariant = None,
-        **kwargs,
+            self,
+            *,
+            sequence_variant: SequenceVariantDb | SequenceVariant = None,
+            **kwargs,
     ):
         if sequence_variant is None:
             super().__init__(**kwargs)
@@ -470,7 +478,8 @@ class ProteinConsequence(Base):
 
     def _create_from_sequence_variant(self, sequence_variant: SequenceVariant):
         if sequence_variant.type != "p":
-            raise ValueError("Sequence variant must be a protein sequence variant")
+            raise ValueError(
+                "Sequence variant must be a protein sequence variant")
 
         # hgvs python package gives the AA3 code by default in the
         # str(variant.posedit) - use regex and convert all to 1 letter code
@@ -493,9 +502,11 @@ class ProteinConsequence(Base):
 
         self.posedit_aa1 = posedit_str
 
-    def _create_from_sequence_variant_db(self, sequence_variant: SequenceVariantDb):
+    def _create_from_sequence_variant_db(self,
+                                         sequence_variant: SequenceVariantDb):
         if sequence_variant.p_hgvs_string is None:
-            raise ValueError("Sequence variant must be a protein sequence variant")
+            raise ValueError(
+                "Sequence variant must be a protein sequence variant")
 
         sv = sequence_variant.sequence_variant(sv_type="p")
 
@@ -521,11 +532,12 @@ class ProteinConsequence(Base):
     __table_args__ = (
         {
             "comment": "For search purposes, store the protein consequence in "
-            "both 1 letter and 3 letter amino acid codes. Not normalized. "
-            "Use this in Algolia or other search engines in addition to the "
-            "normalized hgvs string.",
+                       "both 1 letter and 3 letter amino acid codes. Not normalized. "
+                       "Use this in Algolia or other search engines in addition to the "
+                       "normalized hgvs string.",
         },
     )
 
 
-__all__ = ["SequenceVariantDb", "EditType", "edit_type_ids", "ProteinConsequence"]
+__all__ = ["SequenceVariantDb", "EditType", "edit_type_ids",
+           "ProteinConsequence"]

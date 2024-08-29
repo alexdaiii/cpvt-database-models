@@ -1,6 +1,7 @@
 ### Python template template
 data
 output
+sql
 
 .secrets
 report.xml

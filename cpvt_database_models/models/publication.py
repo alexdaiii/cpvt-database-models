@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import CheckConstraint
+from sqlalchemy import CheckConstraint, ForeignKey, UniqueConstraint
 from sqlalchemy.dialects.postgresql import CITEXT
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -15,9 +15,8 @@ class Publication(Base):
     __tablename__ = "publication"
 
     publication_id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str | None] = mapped_column(CITEXT)
-    first_author: Mapped[str | None] = mapped_column(CITEXT)
-    pmid: Mapped[int | None] = mapped_column(unique=True)
+    title: Mapped[CITEXT | None] = mapped_column(CITEXT)
+    first_author: Mapped[CITEXT | None] = mapped_column(CITEXT)
     reference: Mapped[str | None] = mapped_column(unique=True)
     doi: Mapped[str | None] = mapped_column(unique=True)
     year: Mapped[int | None]
@@ -30,6 +29,10 @@ class Publication(Base):
         "PublicationVariant",
         back_populates="publication",
     )
+    databases: Mapped[list["PublicationToDatabase"]] = relationship(
+        "PublicationToDatabase",
+        back_populates="publication",
+    )
 
     __table_args__ = (
         CheckConstraint(
@@ -37,23 +40,60 @@ class Publication(Base):
             "NOT ("
             "title IS NULL AND "
             "first_author IS NULL AND "
-            "pmid IS NULL AND "
             "reference IS NULL AND "
             "year IS NULL AND "
             "doi IS NULL)",
             name="row_not_null",
         ),
         CheckConstraint(
-            # pmid must be a positive integer
-            "pmid IS NULL OR (pmid > 0)",
-            name="publication_pmid_positive",
-        ),
-        CheckConstraint(
             # doi must match the doi regex
-            "doi IS NULL OR (" "doi ~ '^10.\\d{4,9}/[-._;()/:\\w]+$')",
+            f"doi IS NULL OR (doi ~ '{r'^10.\d{4,9}\/[-._;()\/:\w]+$'}')",
             name="publication_doi_regex",
         ),
     )
 
 
-__all__ = ["Publication"]
+class PublicationDatabase(Base):
+    __tablename__ = "publication_database"
+
+    database_id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(CITEXT, unique=True)
+    origin_url: Mapped[str] = mapped_column(CITEXT, unique=True)
+    resource_uri: Mapped[str] = mapped_column(CITEXT, unique=True)
+
+    publications: Mapped[list["PublicationToDatabase"]] = relationship(
+        "PublicationToDatabase",
+        back_populates="database",
+    )
+
+
+class PublicationToDatabase(Base):
+    __tablename__ = "publication_to_database"
+
+    publication_id: Mapped[int] = mapped_column(
+        ForeignKey("publication.publication_id"), primary_key=True
+    )
+    database_id: Mapped[int] = mapped_column(
+        ForeignKey("publication_database.database_id"),
+        primary_key=True,
+        index=True,
+    )
+    resource_id: Mapped[str] = mapped_column()
+
+    publication: Mapped[Publication] = relationship(
+        "Publication", back_populates="databases"
+    )
+    database: Mapped[PublicationDatabase] = relationship(
+        "PublicationDatabase", back_populates="publications"
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "resource_id",
+            "database_id",
+            name="uq_publication_to_database_resource_id_unique_per_database",
+        ),
+    )
+
+
+__all__ = ["Publication", "PublicationDatabase", "PublicationToDatabase"]

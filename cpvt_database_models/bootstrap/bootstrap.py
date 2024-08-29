@@ -1,54 +1,45 @@
 import asyncio
 import os.path
+import sys
 from contextlib import contextmanager
 
 import sqlalchemy as sa
 
 import pandas as pd
+import argparse
 
-from app.util import get_location
 
-
-def get_uta(
-        *,
-        version: str,
-        dl_url="https://dl.biocommons.org/uta"
-):
+def get_uta(*, version: str, dl_url: str, data_dir: str):
     print("Checking for UTA database")
 
     # Check if UTA database exists
-    if (os.path.exists(os.path.join(
-            get_location(), "data", f"{version}.pgd.gz"
-    )) or os.path.exists(
-        os.path.join(get_location(), "data", f"{version}.sql.gz"
-                     ))):
+    if os.path.exists(os.path.join(data_dir, f"{version}.pgd.gz")) or os.path.exists(
+        os.path.join(data_dir, f"{version}.sql.gz")
+    ):
         print("UTA database found, skipping download")
         return
 
     print("UTA database not found, downloading")
     # Download UTA database
 
-    os.makedirs(os.path.join(get_location(), "data"), exist_ok=True)
-
     for f in ["", ".sha1"]:
         filename = f"{version}.pgd.gz{f}"
 
-        fullpath_name = os.path.join(get_location(), "data", filename)
+        fullpath_name = os.path.join(data_dir, filename)
 
         os.system(
-            f"cd data && test -e {os.path.join(fullpath_name)} || curl -O {dl_url}/{filename}"
+            f"cd {data_dir} && test -e {os.path.join(fullpath_name)} || curl -O {dl_url}/{filename}"
         )
 
 
-def rename_and_unzip(*, version: str):
+def rename_and_unzip(*, version: str, data_dir: str):
     print("Renaming the UTA dump to .sql.gz")
 
     # rename {version}.pgd.gz to {version}.sql.gz if it exists otherwise skip
-    if os.path.exists(
-            os.path.join(get_location(), "data", f"{version}.pgd.gz")):
+    if os.path.exists(os.path.join(data_dir, f"{version}.pgd.gz")):
         os.rename(
-            os.path.join(get_location(), "data", f"{version}.pgd.gz"),
-            os.path.join(get_location(), "data", f"{version}.sql.gz"),
+            os.path.join(data_dir, f"{version}.pgd.gz"),
+            os.path.join(data_dir, f"{version}.sql.gz"),
         )
     else:
         print("No .pgd.gz file found, skipping renaming")
@@ -56,23 +47,18 @@ def rename_and_unzip(*, version: str):
     print("Unzipping the UTA dump if not already unzipped")
 
     # Unzip the UTA dump
-    if os.path.exists(os.path.join(get_location(), "data", f"{version}.sql")):
+    if os.path.exists(os.path.join(data_dir, f"{version}.sql")):
         print("UTA dump already unzipped, skipping")
         return
 
-    os.system(
-        f"cd data && gunzip {os.path.join(get_location(), 'data', f'{version}.sql.gz')}"
-    )
+    os.system(f"cd {data_dir} && gunzip {os.path.join(data_dir, f'{version}.sql.gz')}")
 
 
 def strip_whitespace_lines(string: str) -> str:
     return "\n".join([line.strip() for line in string.split("\n")])
 
 
-def setup_roles(
-        *,
-        sql_dir: str
-):
+def setup_roles(*, sql_dir: str):
     print("Setting up roles for UTA database")
 
     # Create roles for UTA database
@@ -84,19 +70,15 @@ def setup_roles(
                 ALTER ROLE anonymous WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
                 CREATE ROLE uta_admin;
                 ALTER ROLE uta_admin WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
-                """)
+                """
+            )
         )
 
 
-def setup_schema_head(
-        *,
-        sql_dir: str,
-        version: str
-):
+def setup_schema_head(*, sql_dir: str, version: str):
     print("Extracting all sql commands before the first COPY command")
 
-    with open(os.path.join(get_location(), "data", f"{version}.sql"),
-              "r") as f:
+    with open(os.path.join(sql_dir, "..", f"{version}.sql"), "r") as f:
         with open(os.path.join(sql_dir, "02_schema_head.sql"), "w") as f2:
             for line in f:
                 if "COPY" in line:
@@ -104,12 +86,7 @@ def setup_schema_head(
                 f2.write(line)
 
 
-def add_data(
-        *,
-        version: str,
-        sql_dir: str,
-        genes: list[str]
-):
+def add_data(*, version: str, sql_dir: str, genes: list[str]):
     print(f"Adding selected data from {genes} to the database")
 
     all_genes = genes.__str__().replace("[", "(").replace("]", ")")
@@ -125,17 +102,14 @@ def add_data(
                 """,
                 engine,
                 dtype={
-                    "origin_id": 'Int64',
+                    "origin_id": "Int64",
                     "name": str,
                     "descr": str,
                     "updated": str,
                     "url": str,
-                    "url_ac_fmt": str
-                }
-            ).to_csv(
-                os.path.join(sql_dir, "data", "origin.csv"),
-                index=False
-            )
+                    "url_ac_fmt": str,
+                },
+            ).to_csv(os.path.join(sql_dir, "data", "origin.csv"), index=False)
 
             pd.read_sql(
                 f"""
@@ -143,14 +117,8 @@ def add_data(
                 FROM {version}.meta m
                 """,
                 engine,
-                dtype={
-                    "key": str,
-                    "value": str
-                }
-            ).to_csv(
-                os.path.join(sql_dir, "data", "meta.csv"),
-                index=False
-            )
+                dtype={"key": str, "value": str},
+            ).to_csv(os.path.join(sql_dir, "data", "meta.csv"), index=False)
 
             pd.read_sql(
                 f"""
@@ -166,11 +134,8 @@ def add_data(
                     "summary": str,
                     "aliases": str,
                     "added": str,
-                }
-            ).to_csv(
-                os.path.join(sql_dir, "data", "genes.csv"),
-                index=False
-            )
+                },
+            ).to_csv(os.path.join(sql_dir, "data", "genes.csv"), index=False)
 
             protein_ac_subquery = f"""
             SELECT pro_ac AS ac
@@ -202,17 +167,14 @@ def add_data(
                 engine,
                 dtype={
                     "ac": str,
-                    "origin_id": 'Int64',
+                    "origin_id": "Int64",
                     "hgnc": str,
-                    "cds_start_i": 'Int64',
-                    "cds_end_i": 'Int64',
+                    "cds_start_i": "Int64",
+                    "cds_end_i": "Int64",
                     "cds_md5": str,
                     "added": str,
-                }
-            ).to_csv(
-                os.path.join(sql_dir, "data", "transcripts.csv"),
-                index=False
-            )
+                },
+            ).to_csv(os.path.join(sql_dir, "data", "transcripts.csv"), index=False)
 
             pd.read_sql(
                 f"""
@@ -225,17 +187,14 @@ def add_data(
                 """,
                 engine,
                 dtype={
-                    "seq_anno_id": 'Int64',
+                    "seq_anno_id": "Int64",
                     "seq_id": str,
-                    "origin_id": 'Int64',
+                    "origin_id": "Int64",
                     "ac": str,
                     "descr": str,
                     "added": str,
-                }
-            ).to_csv(
-                os.path.join(sql_dir, "data", "seq_anno.csv"),
-                index=False
-            )
+                },
+            ).to_csv(os.path.join(sql_dir, "data", "seq_anno.csv"), index=False)
 
             # psql-uta "select seq_id from seq where seq_id in (select seq_id from seq_anno where ac in (select ac from transcript where hgnc in $PG_GENES));" >download/seq.tsv
             pd.read_sql(
@@ -255,16 +214,8 @@ def add_data(
                 )
                 """,
                 engine,
-                dtype={
-                    "seq_id": str,
-                    "len": 'Int64',
-                    "seq": str
-                }
-
-            ).to_csv(
-                os.path.join(sql_dir, "data", "seq.csv"),
-                index=False
-            )
+                dtype={"seq_id": str, "len": "Int64", "seq": str},
+            ).to_csv(os.path.join(sql_dir, "data", "seq.csv"), index=False)
 
             # psql-uta "select associated_accession_id from associated_accessions where tx_ac in (select ac from transcript where hgnc in $PG_GENES);" >download/associated_accessions.tsv
             pd.read_sql(
@@ -279,15 +230,14 @@ def add_data(
                 """,
                 engine,
                 dtype={
-                    "associated_accession_id": 'Int64',
+                    "associated_accession_id": "Int64",
                     "tx_ac": str,
                     "pro_ac": str,
                     "origin": str,
                     "added": str,
-                }
+                },
             ).to_csv(
-                os.path.join(sql_dir, "data", "associated_accessions.csv"),
-                index=False
+                os.path.join(sql_dir, "data", "associated_accessions.csv"), index=False
             )
 
             # psql-uta "select exon_set_id from exon_set where tx_ac in (select ac from transcript where hgnc in $PG_GENES);" >download/exon_set.tsv
@@ -309,17 +259,14 @@ def add_data(
                 """,
                 engine,
                 dtype={
-                    "exon_set_id": 'Int64',
+                    "exon_set_id": "Int64",
                     "tx_ac": str,
                     "alt_ac": str,
-                    "alt_strand": 'Int64',
+                    "alt_strand": "Int64",
                     "alt_aln_method": str,
                     "added": str,
-                }
-            ).to_csv(
-                os.path.join(sql_dir, "data", "exon_set.csv"),
-                index=False
-            )
+                },
+            ).to_csv(os.path.join(sql_dir, "data", "exon_set.csv"), index=False)
 
             # psql-uta "select exon_id from exon where exon_set_id in (select exon_set_id from exon_set where tx_ac in (select ac from transcript where hgnc in $PG_GENES));" >download/exon.tsv
             pd.read_sql(
@@ -344,17 +291,14 @@ def add_data(
                 """,
                 engine,
                 dtype={
-                    "exon_id": 'Int64',
-                    "exon_set_id": 'Int64',
-                    "start_i": 'Int64',
-                    "end_i": 'Int64',
-                    "ord": 'Int64',
-                    "name": str
-                }
-            ).to_csv(
-                os.path.join(sql_dir, "data", "exon.csv"),
-                index=False
-            )
+                    "exon_id": "Int64",
+                    "exon_set_id": "Int64",
+                    "start_i": "Int64",
+                    "end_i": "Int64",
+                    "ord": "Int64",
+                    "name": str,
+                },
+            ).to_csv(os.path.join(sql_dir, "data", "exon.csv"), index=False)
 
             # psql-uta "select exon_aln_id from exon_aln where tx_exon_id in (select exon_id from exon where exon_set_id in (select exon_set_id from exon_set where tx_ac in (select ac from transcript where hgnc in $PG_GENES)));" >download/exon_aln.tsv
             pd.read_sql(
@@ -384,18 +328,15 @@ def add_data(
                 """,
                 engine,
                 dtype={
-                    "exon_aln_id": 'Int64',
-                    "tx_exon_id": 'Int64',
-                    "alt_exon_id": 'Int64',
+                    "exon_aln_id": "Int64",
+                    "tx_exon_id": "Int64",
+                    "alt_exon_id": "Int64",
                     "cigar": str,
                     "added": str,
                     "tx_aseq": str,
-                    "alt_aseq": str
-                }
-            ).to_csv(
-                os.path.join(sql_dir, "data", "exon_aln.csv"),
-                index=False
-            )
+                    "alt_aseq": str,
+                },
+            ).to_csv(os.path.join(sql_dir, "data", "exon_aln.csv"), index=False)
 
             # make it load data from the csv file
             f.write(
@@ -416,29 +357,25 @@ def add_data(
             )
 
 
-def setup_schema_tail(
-        *,
-        sql_dir: str,
-        version: str
-):
+def setup_schema_tail(*, data_dir: str, version: str):
     print("Extracting tail of UTA database dump from ALTER TABLE onwards")
 
-    with open(os.path.join(sql_dir, "04_schema.sql"), "w") as f:
+    with open(os.path.join(data_dir, "sql", "04_schema.sql"), "w") as f:
         f.write("")
 
     os.system(
         f"""
-        cd {sql_dir} &&
-        tail -1000 "../download/{version}.sql" | \
-        awk '/ALTER TABLE / {{found=1}} found {{print}}' > 04_schema.sql
+        cd {data_dir} &&
+        tail -1000 "{version}.sql" | \
+        awk '/ALTER TABLE / {{found=1}} found {{print}}' > {data_dir}/sql/04_schema.sql
         """
     )
 
 
 def setup_db(
-        *,
-        sql_dir: str,
-        version: str,
+    *,
+    sql_dir: str,
+    version: str,
 ):
     print("Renaming the table to uta")
 
@@ -450,29 +387,6 @@ def setup_db(
                 """
             )
         )
-
-
-def reset_postgres(
-):
-    # require user confirmation
-    print(
-        "Resetting the postgres database. Press 'Y' to confirm, any other key to cancel")
-
-    if input().lower() != "y":
-        print("Reset cancelled")
-        return
-
-    print("Resetting the postgres database")
-
-    os.system(
-        f"cd {os.path.join(get_location(), "..")} && docker-compose down -v"
-    )
-
-    print("Removed old database and volumes")
-
-    os.system(
-        f"cd {os.path.join(get_location(), "..")} && docker-compose up -d"
-    )
 
 
 @contextmanager
@@ -491,38 +405,72 @@ def get_engine():
             engine.dispose()
 
 
+def get_args():
+    parser = argparse.ArgumentParser(description="Bootstrap the CPVT database")
+
+    parser.add_argument(
+        "--dl_url",
+        type=str,
+        required=False,
+        default="https://dl.biocommons.org/uta",
+        help="URL to download the UTA database from. Default is 'https://dl.biocommons.org/uta'",
+    )
+
+    parser.add_argument(
+        "--version",
+        type=str,
+        required=True,
+        help="Version of the UTA database to download. E.g. '--version uta_20210129'. "
+        "Will be appended to the download URL to get the database dump",
+    )
+
+    parser.add_argument(
+        "--genes",
+        type=str,
+        nargs="+",
+        required=True,
+        help="Genes to copy from the UTA database. Input as space separated list. E.g. '--genes RYR2 CASQ2'",
+    )
+
+    parser.add_argument(
+        "--data_dir",
+        type=str,
+        required=False,
+        # default is the current directory where the script is run /data
+        default=os.path.join(os.getcwd(), "data"),
+        help="Directory to store the downloaded UTA database dump. Default is the <CURRENT_DIR>/data. "
+        f"Current directory is the directory where the script is run ({os.path.join(os.getcwd(), "data")})",
+    )
+
+    parser.add_argument(
+        "--compose_file",
+        type=str,
+        required=False,
+    )
+
+    if len(sys.argv) == 1:
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+
+    return parser.parse_args()
+
+
 async def main():
-    VERSION = "uta_20210129"
-    genes = ["RYR2", ]
+    args = get_args()
 
-    get_uta(version=VERSION)
-    rename_and_unzip(version=VERSION)
+    os.makedirs(os.path.join(args.data_dir), exist_ok=True)
 
-    os.makedirs(os.path.join(get_location(), "sql"), exist_ok=True)
-    sql_dir = os.path.join(get_location(), "sql")
+    get_uta(version=args.version, dl_url=args.dl_url, data_dir=args.data_dir)
+    rename_and_unzip(version=args.version, data_dir=args.data_dir)
 
-    setup_roles(
-        sql_dir=sql_dir
-    )
-    setup_schema_head(
-        sql_dir=sql_dir,
-        version=VERSION
-    )
-    add_data(
-        sql_dir=sql_dir,
-        genes=genes,
-        version=VERSION
-    )
-    setup_schema_tail(
-        sql_dir=sql_dir,
-        version=VERSION
-    )
-    setup_db(
-        sql_dir=sql_dir,
-        version=VERSION
-    )
+    sql_dir = os.path.join(args.data_dir, "sql")
+    os.makedirs(sql_dir, exist_ok=True)
 
-    reset_postgres()
+    setup_roles(sql_dir=sql_dir)
+    setup_schema_head(sql_dir=sql_dir, version=args.version)
+    add_data(sql_dir=sql_dir, genes=args.genes, version=args.version)
+    setup_schema_tail(data_dir=args.data_dir, version=args.version)
+    setup_db(sql_dir=sql_dir, version=args.version)
 
 
 if __name__ == "__main__":

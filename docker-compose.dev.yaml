@@ -1,10 +1,5 @@
 services:
 
-  gitlab-runner:
-    image: gitlab/gitlab-runner:latest
-
-
-
   db:
     image: postgres:16
     environment:
