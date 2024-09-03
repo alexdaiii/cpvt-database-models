@@ -70,8 +70,7 @@ def upgrade() -> None:
             server_default=sa.text("now()"),
             nullable=False,
         ),
-        sa.PrimaryKeyConstraint("database_id",
-                                name=op.f("pk_publication_database")),
+        sa.PrimaryKeyConstraint("database_id", name=op.f("pk_publication_database")),
         sa.UniqueConstraint("name", name=op.f("uq_publication_database_name")),
         sa.UniqueConstraint(
             "origin_url", name=op.f("uq_publication_database_origin_url")
@@ -100,8 +99,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(
             ["database_id"],
             ["publication_database.database_id"],
-            name=op.f(
-                "fk_publication_to_database_database_id_publication_database"),
+            name=op.f("fk_publication_to_database_database_id_publication_database"),
         ),
         sa.ForeignKeyConstraint(
             ["publication_id"],

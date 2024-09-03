@@ -124,8 +124,7 @@ invalid_data = {
 
 
 @pytest.mark.parametrize(
-    ["filter_class", "filter_data"], invalid_data.values(),
-    ids=invalid_data.keys()
+    ["filter_class", "filter_data"], invalid_data.values(), ids=invalid_data.keys()
 )
 def test_invalid_filter(filter_class: Type[FilterJSONB], filter_data: dict):
     with pytest.raises(ValidationError):
@@ -154,10 +153,7 @@ async def test_add_filters(view_session: AsyncSession):
         key: str
         value: list[FilterById | FilterByRange]
 
-        model_config = ConfigDict(
-            extra="ignore",
-            from_attributes=True
-        )
+        model_config = ConfigDict(extra="ignore", from_attributes=True)
 
     # all filters values should be either a FilterById or FilterByRange in a list
     for kv in result:
