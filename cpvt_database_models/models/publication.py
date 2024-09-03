@@ -15,8 +15,8 @@ class Publication(Base):
     __tablename__ = "publication"
 
     publication_id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[CITEXT | None] = mapped_column(CITEXT)
-    first_author: Mapped[CITEXT | None] = mapped_column(CITEXT)
+    title: Mapped[str | None] = mapped_column(CITEXT)
+    first_author: Mapped[str | None] = mapped_column(CITEXT)
     reference: Mapped[str | None] = mapped_column(unique=True)
     doi: Mapped[str | None] = mapped_column(unique=True)
     year: Mapped[int | None]

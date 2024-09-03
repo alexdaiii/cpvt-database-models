@@ -4,15 +4,6 @@ import pytest
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from cpvt_database_models.models.views import add_views_pg
-
-
-@pytest.fixture
-async def setup_views_db(
-        session: AsyncSession,
-):
-    await add_views_pg(session)
-
 
 @pytest.mark.parametrize(
     "views",
@@ -26,9 +17,10 @@ async def setup_views_db(
         "cpvt_patients_v",
     ],
 )
-async def test_views_created(session: AsyncSession, setup_views_db, views: str):
+async def test_views_created(view_session: AsyncSession, views: str):
     result = (
-        await session.execute(text(f"SELECT * FROM {views}"))).scalars().all()
+        (await view_session.execute(text(f"SELECT * FROM {views}"))).scalars().all()
+    )
 
     assert result is not None
 

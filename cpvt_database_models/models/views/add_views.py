@@ -17,14 +17,14 @@ _ERROR_MESSAGE = (
 )
 
 
-def get_sql_files():
+def get_sql_files(base_dir: str):
     """
     Sql files should be located in the ./sql directory relative to this file
     """
 
     sql_files = []
 
-    for root, _, files in os.walk(os.path.join(os.path.dirname(__file__), "sql")):
+    for root, _, files in os.walk(base_dir):
         for file in sorted(files):
             if file.endswith(".sql"):
                 sql_files.append(os.path.join(root, file))
@@ -32,10 +32,12 @@ def get_sql_files():
     return sql_files
 
 
-async def add_views_pg(session: AsyncSession):
+async def add_views_pg(session: AsyncSession, base_dir: str):
     print("Adding views")
 
-    sql_files = get_sql_files()
+    sql_files = get_sql_files(base_dir)
+
+    print(f"Found {len(sql_files)} sql files")
 
     for sql_file in sql_files:
         print(f"Executing {sql_file}")
@@ -66,14 +68,15 @@ async def execute_file(session: AsyncSession, sql_file):
     print(f"Time taken: {end_time - start_time:.2f} seconds")
 
 
-async def main():
+async def add_views_main():  # pragma: no cover
     asyncio_engine = create_async_engine(get_settings().postgresql_dsn)
+    base_dir = os.path.join(os.path.dirname(__file__), "sql")
 
     async with asyncio_engine.begin() as conn:
-        await add_views_pg(conn)
+        await add_views_pg(conn, base_dir)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(add_views_main())
 
-__all__ = ["add_views_pg", "main"]
+__all__ = ["add_views_pg", "add_views_main"]

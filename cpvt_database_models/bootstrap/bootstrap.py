@@ -442,12 +442,6 @@ def get_args():
         f"Current directory is the directory where the script is run ({os.path.join(os.getcwd(), "data")})",
     )
 
-    parser.add_argument(
-        "--compose_file",
-        type=str,
-        required=False,
-    )
-
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
         sys.exit(1)
