@@ -39,6 +39,8 @@ from cpvt_database_models.models import (
     SequenceVariantDb,
     edit_type_ids,
     ProteinConsequence,
+    PublicationDatabase,
+    PublicationToDatabase,
 )
 
 
@@ -209,6 +211,20 @@ _models: dict[str, Callable[[], list[BaseBase]]] = {
         ProteinConsequence(
             protein_consequence_id=1,
             sequence_variant=parser.parse("NP_003997.1:p.Trp24Ter"),
+        ),
+    ],
+    "publication_to_database": lambda: [
+        Publication(publication_id=1, title="Medical Journal"),
+        PublicationDatabase(
+            database_id=1,
+            name="Pubmed",
+            origin_url="https://pubmed.ncbi.nlm.nih.gov/",
+            resource_uri="https://pubmed.ncbi.nlm.nih.gov/",
+        ),
+        PublicationToDatabase(
+            publication_id=1,
+            database_id=1,
+            resource_id="123",
         ),
     ],
 }

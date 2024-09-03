@@ -134,7 +134,9 @@ class SequenceVariantDb(
                     variant_c.posedit.pos.start.base,
                     variant_c.posedit.pos.end.base,
                     bounds="[]",
-                ),
+                )
+                if variant_c.posedit.pos.start.base <= variant_c.posedit.pos.end.base
+                else None,
                 "c_hgvs_string": str(variant_c),
             }
             # add start and end offsets if they exist

@@ -7,9 +7,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from cpvt_database_models.database.base import Base
 
 if TYPE_CHECKING:  # pragma: no cover
-    from cpvt_database_models.models.pathogenicity_predictor import (
-        PathogenicityPrediction,
-    )
     from cpvt_database_models.models.individuals import IndividualVariant
     from .variant_properties import ClinicalSignificance, VariantClinVarInfo
     from .variant_origins import DatasetVariant, PublicationVariant
@@ -83,12 +80,6 @@ class Variant(Base):
             "ClinVarVariantLinkedCondition",
             back_populates="variant",
         )
-    )
-
-    # Predictions
-    predictions: Mapped[list["PathogenicityPrediction"]] = relationship(
-        "PathogenicityPrediction",
-        back_populates="variant",
     )
 
     # Individual

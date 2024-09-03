@@ -1,3 +1,5 @@
+import os
+
 import pytest
 import pytest_asyncio
 from sqlalchemy import text, Connection
@@ -9,6 +11,8 @@ from sqlalchemy.ext.asyncio import (
     AsyncConnection,
     async_sessionmaker,
 )
+
+from cpvt_database_models.models.views import add_views_pg
 
 
 @pytest.fixture(scope="module")
@@ -22,7 +26,7 @@ def get_container() -> PostgresContainer:
 
 @pytest.fixture(scope="module")
 def get_engine(get_container: PostgresContainer) -> AsyncEngine:
-    asyncio_engine = create_async_engine(get_container.get_connection_url(), echo=True)
+    asyncio_engine = create_async_engine(get_container.get_connection_url(), echo=False)
 
     yield asyncio_engine
 
@@ -82,3 +86,20 @@ async def session(setup_session: AsyncConnection) -> AsyncSession:
     )
     async with session_maker() as sess:
         yield sess
+
+
+@pytest.fixture
+async def view_session(
+    session: AsyncSession,
+):
+    import cpvt_database_models
+
+    await add_views_pg(
+        session,
+        os.path.join(
+            os.path.dirname(os.path.abspath(cpvt_database_models.__file__)),
+            "models/views/sql",
+        ),
+    )
+
+    yield session

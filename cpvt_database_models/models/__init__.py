@@ -46,13 +46,7 @@ from .conditions import (
 from .kv_store import (
     KVStore,
 )
-from .pathogenicity_predictor import (
-    PathogenicityPredictor,
-    PathogenicityPrediction,
-)
-from .publication import (
-    Publication,
-)
+from .publication import Publication, PublicationDatabase, PublicationToDatabase
 
 __all__ = [
     "IndividualCondition",
@@ -87,9 +81,9 @@ __all__ = [
     "Condition",
     "ConditionSynonym",
     "KVStore",
-    "PathogenicityPredictor",
-    "PathogenicityPrediction",
     "Publication",
+    "PublicationDatabase",
+    "PublicationToDatabase",
     "VariantClinVarInfo",
     "ClinicalSignificance",
 ]

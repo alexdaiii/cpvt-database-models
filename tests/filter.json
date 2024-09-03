@@ -1,0 +1,2764 @@
+
+
+
+
+
+[
+  {
+    "label": "Provenance",
+    "hidden": false,
+    "values": [
+      {
+        "label": "ClinVar",
+        "value": 1
+      },
+      {
+        "label": "Location of Ryanodine Receptor Type 2 Mutation Predicts Age of Onset of Sudden Death in Catecholaminergic Polymorphic Ventricular Tachycardia",
+        "value": 2
+      }
+    ],
+    "ordinal": 1,
+    "component": "checkboxes",
+    "histogram": null,
+    "queryParam": "provenance",
+    "shortLabel": null,
+    "description": null
+  },
+  {
+    "label": "Consequence Type",
+    "hidden": false,
+    "values": [
+      {
+        "label": "Copy",
+        "value": 9
+      },
+      {
+        "label": "Frameshift",
+        "value": 10
+      },
+      {
+        "label": "Identical",
+        "value": 1
+      },
+      {
+        "label": "Insertion",
+        "value": 5
+      },
+      {
+        "label": "Substitution",
+        "value": 2
+      },
+      {
+        "label": "Inversion",
+        "value": 7
+      },
+      {
+        "label": "Duplication",
+        "value": 6
+      },
+      {
+        "label": "Conversion",
+        "value": 8
+      },
+      {
+        "label": "Special",
+        "value": 12
+      },
+      {
+        "label": "Extension",
+        "value": 11
+      },
+      {
+        "label": "Deletion-Insertion",
+        "value": 3
+      },
+      {
+        "label": "Deletion",
+        "value": 4
+      },
+      {
+        "label": "Unknown",
+        "value": 13
+      }
+    ],
+    "ordinal": 2,
+    "component": "checkboxes",
+    "histogram": null,
+    "queryParam": "editType",
+    "shortLabel": null,
+    "description": "The consequence of a variant to the genome or protein sequence."
+  },
+  {
+    "label": "Clinical Significance",
+    "hidden": false,
+    "values": [
+      {
+        "label": "Benign",
+        "value": 5
+      },
+      {
+        "label": "Pathogenic/Likely pathogenic",
+        "value": 2
+      },
+      {
+        "label": "Pathogenic",
+        "value": 1
+      },
+      {
+        "label": "Likely benign",
+        "value": 8
+      },
+      {
+        "label": "Likely pathogenic",
+        "value": 6
+      },
+      {
+        "label": "Uncertain significance",
+        "value": 3
+      },
+      {
+        "label": "Benign/Likely benign",
+        "value": 4
+      },
+      {
+        "label": "Conflicting classifications of pathogenicity",
+        "value": 7
+      }
+    ],
+    "ordinal": 3,
+    "component": "checkboxes",
+    "histogram": null,
+    "queryParam": "clinicalSignificance",
+    "shortLabel": null,
+    "description": "The clinical significance of a variant is a classification of the variant based on its potential impact on health calculated by the NCBI in the ClinVar database."
+  },
+  {
+    "label": "Number of Individuals",
+    "hidden": false,
+    "values": [
+      {
+        "max": 183,
+        "min": 0
+      }
+    ],
+    "ordinal": 4,
+    "component": "range",
+    "histogram": [
+      {
+        "bin": 1,
+        "freq": 2.57
+      },
+      {
+        "bin": 2,
+        "freq": 1
+      },
+      {
+        "bin": 3,
+        "freq": 0.9
+      },
+      {
+        "bin": 4,
+        "freq": 0.78
+      },
+      {
+        "bin": 5,
+        "freq": 0
+      },
+      {
+        "bin": 6,
+        "freq": 0
+      },
+      {
+        "bin": 7,
+        "freq": 0.3
+      },
+      {
+        "bin": 8,
+        "freq": 0
+      },
+      {
+        "bin": 9,
+        "freq": 0.3
+      },
+      {
+        "bin": 10,
+        "freq": 0
+      },
+      {
+        "bin": 11,
+        "freq": 0
+      },
+      {
+        "bin": 12,
+        "freq": 0
+      },
+      {
+        "bin": 13,
+        "freq": 0
+      },
+      {
+        "bin": 14,
+        "freq": 0
+      },
+      {
+        "bin": 15,
+        "freq": 0
+      },
+      {
+        "bin": 16,
+        "freq": 0
+      },
+      {
+        "bin": 17,
+        "freq": 0
+      },
+      {
+        "bin": 18,
+        "freq": 0
+      },
+      {
+        "bin": 19,
+        "freq": 0
+      },
+      {
+        "bin": 20,
+        "freq": 0
+      },
+      {
+        "bin": 21,
+        "freq": 0
+      },
+      {
+        "bin": 22,
+        "freq": 0
+      },
+      {
+        "bin": 23,
+        "freq": 0
+      },
+      {
+        "bin": 24,
+        "freq": 0
+      },
+      {
+        "bin": 25,
+        "freq": 0
+      },
+      {
+        "bin": 26,
+        "freq": 0
+      },
+      {
+        "bin": 27,
+        "freq": 0
+      },
+      {
+        "bin": 28,
+        "freq": 0
+      },
+      {
+        "bin": 29,
+        "freq": 0
+      },
+      {
+        "bin": 30,
+        "freq": 0.3
+      }
+    ],
+    "queryParam": "numIndividuals",
+    "shortLabel": null,
+    "description": null
+  },
+  {
+    "label": "Average Age of Onset of CPVT",
+    "hidden": false,
+    "values": [
+      {
+        "max": 60,
+        "min": 0
+      }
+    ],
+    "ordinal": 5,
+    "component": "range",
+    "histogram": [
+      {
+        "bin": 1,
+        "freq": 2
+      },
+      {
+        "bin": 2,
+        "freq": 1
+      },
+      {
+        "bin": 3,
+        "freq": 6
+      },
+      {
+        "bin": 4,
+        "freq": 7
+      },
+      {
+        "bin": 5,
+        "freq": 11
+      },
+      {
+        "bin": 6,
+        "freq": 8
+      },
+      {
+        "bin": 7,
+        "freq": 14
+      },
+      {
+        "bin": 8,
+        "freq": 13
+      },
+      {
+        "bin": 9,
+        "freq": 25
+      },
+      {
+        "bin": 10,
+        "freq": 14
+      },
+      {
+        "bin": 11,
+        "freq": 9
+      },
+      {
+        "bin": 12,
+        "freq": 10
+      },
+      {
+        "bin": 13,
+        "freq": 6
+      },
+      {
+        "bin": 14,
+        "freq": 4
+      },
+      {
+        "bin": 15,
+        "freq": 1
+      },
+      {
+        "bin": 16,
+        "freq": 3
+      },
+      {
+        "bin": 17,
+        "freq": 3
+      },
+      {
+        "bin": 18,
+        "freq": 0
+      },
+      {
+        "bin": 19,
+        "freq": 2
+      },
+      {
+        "bin": 20,
+        "freq": 1
+      },
+      {
+        "bin": 21,
+        "freq": 2
+      },
+      {
+        "bin": 22,
+        "freq": 3
+      },
+      {
+        "bin": 23,
+        "freq": 2
+      },
+      {
+        "bin": 24,
+        "freq": 1
+      },
+      {
+        "bin": 25,
+        "freq": 4
+      },
+      {
+        "bin": 26,
+        "freq": 1
+      },
+      {
+        "bin": 27,
+        "freq": 0
+      },
+      {
+        "bin": 28,
+        "freq": 0
+      },
+      {
+        "bin": 29,
+        "freq": 0
+      },
+      {
+        "bin": 30,
+        "freq": 2
+      },
+      {
+        "bin": 31,
+        "freq": 0
+      },
+      {
+        "bin": 32,
+        "freq": 1
+      },
+      {
+        "bin": 33,
+        "freq": 0
+      },
+      {
+        "bin": 34,
+        "freq": 1
+      },
+      {
+        "bin": 35,
+        "freq": 0
+      },
+      {
+        "bin": 36,
+        "freq": 1
+      },
+      {
+        "bin": 37,
+        "freq": 0
+      },
+      {
+        "bin": 38,
+        "freq": 0
+      },
+      {
+        "bin": 39,
+        "freq": 0
+      },
+      {
+        "bin": 40,
+        "freq": 0
+      },
+      {
+        "bin": 41,
+        "freq": 0
+      },
+      {
+        "bin": 42,
+        "freq": 0
+      },
+      {
+        "bin": 43,
+        "freq": 0
+      },
+      {
+        "bin": 44,
+        "freq": 0
+      },
+      {
+        "bin": 45,
+        "freq": 0
+      },
+      {
+        "bin": 46,
+        "freq": 1
+      },
+      {
+        "bin": 47,
+        "freq": 0
+      },
+      {
+        "bin": 48,
+        "freq": 0
+      },
+      {
+        "bin": 49,
+        "freq": 0
+      },
+      {
+        "bin": 50,
+        "freq": 1
+      }
+    ],
+    "queryParam": "avgAgeOfOnsetCpvt",
+    "shortLabel": null,
+    "description": "Age of onset is the age at which the first symptoms of CPVT were observed."
+  },
+  {
+    "label": "Protein Change Position",
+    "hidden": false,
+    "values": [
+      {
+        "max": 4966,
+        "min": 1
+      }
+    ],
+    "ordinal": 6,
+    "component": "range",
+    "histogram": [
+      {
+        "bin": 1,
+        "freq": 13
+      },
+      {
+        "bin": 2,
+        "freq": 16
+      },
+      {
+        "bin": 3,
+        "freq": 4
+      },
+      {
+        "bin": 4,
+        "freq": 7
+      },
+      {
+        "bin": 5,
+        "freq": 21
+      },
+      {
+        "bin": 6,
+        "freq": 3
+      },
+      {
+        "bin": 7,
+        "freq": 2
+      },
+      {
+        "bin": 8,
+        "freq": 2
+      },
+      {
+        "bin": 9,
+        "freq": 2
+      },
+      {
+        "bin": 10,
+        "freq": 2
+      },
+      {
+        "bin": 11,
+        "freq": 4
+      },
+      {
+        "bin": 12,
+        "freq": 3
+      },
+      {
+        "bin": 13,
+        "freq": 3
+      },
+      {
+        "bin": 14,
+        "freq": 2
+      },
+      {
+        "bin": 15,
+        "freq": 1
+      },
+      {
+        "bin": 16,
+        "freq": 5
+      },
+      {
+        "bin": 17,
+        "freq": 1
+      },
+      {
+        "bin": 18,
+        "freq": 6
+      },
+      {
+        "bin": 19,
+        "freq": 4
+      },
+      {
+        "bin": 20,
+        "freq": 1
+      },
+      {
+        "bin": 21,
+        "freq": 2
+      },
+      {
+        "bin": 22,
+        "freq": 12
+      },
+      {
+        "bin": 23,
+        "freq": 14
+      },
+      {
+        "bin": 24,
+        "freq": 20
+      },
+      {
+        "bin": 25,
+        "freq": 25
+      },
+      {
+        "bin": 26,
+        "freq": 6
+      },
+      {
+        "bin": 27,
+        "freq": 4
+      },
+      {
+        "bin": 28,
+        "freq": 0
+      },
+      {
+        "bin": 29,
+        "freq": 1
+      },
+      {
+        "bin": 30,
+        "freq": 3
+      },
+      {
+        "bin": 31,
+        "freq": 1
+      },
+      {
+        "bin": 32,
+        "freq": 1
+      },
+      {
+        "bin": 33,
+        "freq": 5
+      },
+      {
+        "bin": 34,
+        "freq": 3
+      },
+      {
+        "bin": 35,
+        "freq": 1
+      },
+      {
+        "bin": 36,
+        "freq": 2
+      },
+      {
+        "bin": 37,
+        "freq": 2
+      },
+      {
+        "bin": 38,
+        "freq": 4
+      },
+      {
+        "bin": 39,
+        "freq": 8
+      },
+      {
+        "bin": 40,
+        "freq": 14
+      },
+      {
+        "bin": 41,
+        "freq": 12
+      },
+      {
+        "bin": 42,
+        "freq": 43
+      },
+      {
+        "bin": 43,
+        "freq": 17
+      },
+      {
+        "bin": 44,
+        "freq": 3
+      },
+      {
+        "bin": 45,
+        "freq": 4
+      },
+      {
+        "bin": 46,
+        "freq": 11
+      },
+      {
+        "bin": 47,
+        "freq": 17
+      },
+      {
+        "bin": 48,
+        "freq": 14
+      },
+      {
+        "bin": 49,
+        "freq": 14
+      },
+      {
+        "bin": 50,
+        "freq": 17
+      }
+    ],
+    "queryParam": "pPosInterval",
+    "shortLabel": null,
+    "description": "The position(s) of the amino acid(s) affected by the variant."
+  },
+  {
+    "label": "Protein Domains Affected",
+    "hidden": false,
+    "values": [
+      {
+        "label": "N-terminal domain (NTD)",
+        "value": 3
+      },
+      {
+        "label": "Bridging solenoid 1  (BSol1)",
+        "value": 14
+      },
+      {
+        "label": "RYR repeats 3 & 4  (RY3&4)",
+        "value": 17
+      },
+      {
+        "label": "Channel pore domain  (Pore)",
+        "value": 26
+      },
+      {
+        "label": "Thumb and forefingers domain  (TaF)",
+        "value": 22
+      },
+      {
+        "label": "Shell-core linker peptide  (SCLP)",
+        "value": 18
+      },
+      {
+        "label": "RYR repeats 1 & 2  (RY1&2)",
+        "value": 11
+      },
+      {
+        "label": "Auxiliary intramembrane helices  (Sx)",
+        "value": 24
+      },
+      {
+        "label": "Core solenoid (CSol)",
+        "value": 20
+      },
+      {
+        "label": "N-terminal domain A (NTD-A)",
+        "value": 4
+      },
+      {
+        "label": "Zn-finger domain  (ZnF)",
+        "value": 28
+      },
+      {
+        "label": "Bridging solenoid  (BSol)",
+        "value": 13
+      },
+      {
+        "label": "SP1a/ryanodine receptor domain 3  (SPRY3)",
+        "value": 10
+      },
+      {
+        "label": "SPRY domain (SPRY)",
+        "value": 7
+      },
+      {
+        "label": "Bridging solenoid 2  (BSol2)",
+        "value": 15
+      },
+      {
+        "label": "Pseudo voltage sensor domain  (pVSD)",
+        "value": 25
+      },
+      {
+        "label": "N-terminal domain B (NTD-B)",
+        "value": 5
+      },
+      {
+        "label": "EF-hand pair  (EF1&2)",
+        "value": 21
+      },
+      {
+        "label": "Activation core and channel",
+        "value": 19
+      },
+      {
+        "label": "Bridging solenoid 3  (BSol3)",
+        "value": 16
+      },
+      {
+        "label": "Transmembrane domain  (TM)",
+        "value": 23
+      },
+      {
+        "label": "Junctional solenoid  (JSol)",
+        "value": 12
+      },
+      {
+        "label": "Cytosolic shell",
+        "value": 2
+      },
+      {
+        "label": "SP1a/ryanodine receptor domain 2  (SPRY2)",
+        "value": 9
+      },
+      {
+        "label": "SP1a/ryanodine receptor domain 1  (SPRY1)",
+        "value": 8
+      },
+      {
+        "label": "C-terminal domain  (CTD)",
+        "value": 27
+      },
+      {
+        "label": "N-terminal solenoid (NSol)",
+        "value": 6
+      },
+      {
+        "label": "RYR2",
+        "value": 1
+      }
+    ],
+    "ordinal": 7,
+    "component": "combobox",
+    "histogram": null,
+    "queryParam": "structureDomain",
+    "shortLabel": "domains",
+    "description": "Filter for variants affecting specific protein domains."
+  },
+  {
+    "label": "Exons Affected (Range)",
+    "hidden": false,
+    "values": [
+      {
+        "max": 105,
+        "min": 1
+      }
+    ],
+    "ordinal": 8,
+    "component": "range",
+    "histogram": [
+      {
+        "bin": 1,
+        "freq": 4
+      },
+      {
+        "bin": 2,
+        "freq": 3
+      },
+      {
+        "bin": 3,
+        "freq": 3
+      },
+      {
+        "bin": 4,
+        "freq": 0
+      },
+      {
+        "bin": 5,
+        "freq": 0
+      },
+      {
+        "bin": 6,
+        "freq": 1
+      },
+      {
+        "bin": 7,
+        "freq": 1
+      },
+      {
+        "bin": 8,
+        "freq": 12
+      },
+      {
+        "bin": 9,
+        "freq": 0
+      },
+      {
+        "bin": 10,
+        "freq": 0
+      },
+      {
+        "bin": 11,
+        "freq": 2
+      },
+      {
+        "bin": 12,
+        "freq": 4
+      },
+      {
+        "bin": 13,
+        "freq": 1
+      },
+      {
+        "bin": 14,
+        "freq": 13
+      },
+      {
+        "bin": 15,
+        "freq": 6
+      },
+      {
+        "bin": 16,
+        "freq": 1
+      },
+      {
+        "bin": 17,
+        "freq": 1
+      },
+      {
+        "bin": 18,
+        "freq": 1
+      },
+      {
+        "bin": 19,
+        "freq": 1
+      },
+      {
+        "bin": 20,
+        "freq": 0
+      },
+      {
+        "bin": 21,
+        "freq": 0
+      },
+      {
+        "bin": 22,
+        "freq": 1
+      },
+      {
+        "bin": 23,
+        "freq": 2
+      },
+      {
+        "bin": 24,
+        "freq": 1
+      },
+      {
+        "bin": 25,
+        "freq": 0
+      },
+      {
+        "bin": 26,
+        "freq": 1
+      },
+      {
+        "bin": 27,
+        "freq": 6
+      },
+      {
+        "bin": 28,
+        "freq": 0
+      },
+      {
+        "bin": 29,
+        "freq": 0
+      },
+      {
+        "bin": 30,
+        "freq": 3
+      },
+      {
+        "bin": 31,
+        "freq": 2
+      },
+      {
+        "bin": 32,
+        "freq": 0
+      },
+      {
+        "bin": 33,
+        "freq": 0
+      },
+      {
+        "bin": 34,
+        "freq": 2
+      },
+      {
+        "bin": 35,
+        "freq": 2
+      },
+      {
+        "bin": 36,
+        "freq": 3
+      },
+      {
+        "bin": 37,
+        "freq": 10
+      },
+      {
+        "bin": 38,
+        "freq": 1
+      },
+      {
+        "bin": 39,
+        "freq": 0
+      },
+      {
+        "bin": 40,
+        "freq": 0
+      },
+      {
+        "bin": 41,
+        "freq": 5
+      },
+      {
+        "bin": 42,
+        "freq": 8
+      },
+      {
+        "bin": 43,
+        "freq": 8
+      },
+      {
+        "bin": 44,
+        "freq": 2
+      },
+      {
+        "bin": 45,
+        "freq": 8
+      },
+      {
+        "bin": 46,
+        "freq": 9
+      },
+      {
+        "bin": 47,
+        "freq": 12
+      },
+      {
+        "bin": 48,
+        "freq": 4
+      },
+      {
+        "bin": 49,
+        "freq": 5
+      },
+      {
+        "bin": 50,
+        "freq": 5
+      },
+      {
+        "bin": 51,
+        "freq": 1
+      },
+      {
+        "bin": 52,
+        "freq": 2
+      },
+      {
+        "bin": 53,
+        "freq": 1
+      },
+      {
+        "bin": 54,
+        "freq": 0
+      },
+      {
+        "bin": 55,
+        "freq": 0
+      },
+      {
+        "bin": 56,
+        "freq": 0
+      },
+      {
+        "bin": 57,
+        "freq": 1
+      },
+      {
+        "bin": 58,
+        "freq": 0
+      },
+      {
+        "bin": 59,
+        "freq": 0
+      },
+      {
+        "bin": 60,
+        "freq": 2
+      },
+      {
+        "bin": 61,
+        "freq": 0
+      },
+      {
+        "bin": 62,
+        "freq": 0
+      },
+      {
+        "bin": 63,
+        "freq": 0
+      },
+      {
+        "bin": 64,
+        "freq": 1
+      },
+      {
+        "bin": 65,
+        "freq": 1
+      },
+      {
+        "bin": 66,
+        "freq": 0
+      },
+      {
+        "bin": 67,
+        "freq": 1
+      },
+      {
+        "bin": 68,
+        "freq": 4
+      },
+      {
+        "bin": 69,
+        "freq": 3
+      },
+      {
+        "bin": 70,
+        "freq": 1
+      },
+      {
+        "bin": 71,
+        "freq": 0
+      },
+      {
+        "bin": 72,
+        "freq": 0
+      },
+      {
+        "bin": 73,
+        "freq": 0
+      },
+      {
+        "bin": 74,
+        "freq": 1
+      },
+      {
+        "bin": 75,
+        "freq": 1
+      },
+      {
+        "bin": 76,
+        "freq": 0
+      },
+      {
+        "bin": 77,
+        "freq": 1
+      },
+      {
+        "bin": 78,
+        "freq": 1
+      },
+      {
+        "bin": 79,
+        "freq": 0
+      },
+      {
+        "bin": 80,
+        "freq": 0
+      },
+      {
+        "bin": 81,
+        "freq": 3
+      },
+      {
+        "bin": 82,
+        "freq": 0
+      },
+      {
+        "bin": 83,
+        "freq": 3
+      },
+      {
+        "bin": 84,
+        "freq": 1
+      },
+      {
+        "bin": 85,
+        "freq": 0
+      },
+      {
+        "bin": 86,
+        "freq": 6
+      },
+      {
+        "bin": 87,
+        "freq": 2
+      },
+      {
+        "bin": 88,
+        "freq": 5
+      },
+      {
+        "bin": 89,
+        "freq": 2
+      },
+      {
+        "bin": 90,
+        "freq": 62
+      },
+      {
+        "bin": 91,
+        "freq": 1
+      },
+      {
+        "bin": 92,
+        "freq": 2
+      },
+      {
+        "bin": 93,
+        "freq": 4
+      },
+      {
+        "bin": 94,
+        "freq": 10
+      },
+      {
+        "bin": 95,
+        "freq": 7
+      },
+      {
+        "bin": 96,
+        "freq": 2
+      },
+      {
+        "bin": 97,
+        "freq": 8
+      },
+      {
+        "bin": 98,
+        "freq": 0
+      },
+      {
+        "bin": 99,
+        "freq": 8
+      },
+      {
+        "bin": 100,
+        "freq": 4
+      },
+      {
+        "bin": 101,
+        "freq": 6
+      },
+      {
+        "bin": 102,
+        "freq": 4
+      },
+      {
+        "bin": 103,
+        "freq": 4
+      },
+      {
+        "bin": 104,
+        "freq": 1
+      },
+      {
+        "bin": 105,
+        "freq": 7
+      }
+    ],
+    "queryParam": "exonRange",
+    "shortLabel": null,
+    "description": null
+  },
+  {
+    "label": "Exons Affected",
+    "hidden": false,
+    "values": [
+      {
+        "label": "Exon 1",
+        "value": 1
+      },
+      {
+        "label": "Exon 2",
+        "value": 2
+      },
+      {
+        "label": "Exon 3",
+        "value": 3
+      },
+      {
+        "label": "Exon 4",
+        "value": 4
+      },
+      {
+        "label": "Exon 5",
+        "value": 5
+      },
+      {
+        "label": "Exon 6",
+        "value": 6
+      },
+      {
+        "label": "Exon 7",
+        "value": 7
+      },
+      {
+        "label": "Exon 8",
+        "value": 8
+      },
+      {
+        "label": "Exon 9",
+        "value": 9
+      },
+      {
+        "label": "Exon 10",
+        "value": 10
+      },
+      {
+        "label": "Exon 11",
+        "value": 11
+      },
+      {
+        "label": "Exon 12",
+        "value": 12
+      },
+      {
+        "label": "Exon 13",
+        "value": 13
+      },
+      {
+        "label": "Exon 14",
+        "value": 14
+      },
+      {
+        "label": "Exon 15",
+        "value": 15
+      },
+      {
+        "label": "Exon 16",
+        "value": 16
+      },
+      {
+        "label": "Exon 17",
+        "value": 17
+      },
+      {
+        "label": "Exon 18",
+        "value": 18
+      },
+      {
+        "label": "Exon 19",
+        "value": 19
+      },
+      {
+        "label": "Exon 20",
+        "value": 20
+      },
+      {
+        "label": "Exon 21",
+        "value": 21
+      },
+      {
+        "label": "Exon 22",
+        "value": 22
+      },
+      {
+        "label": "Exon 23",
+        "value": 23
+      },
+      {
+        "label": "Exon 24",
+        "value": 24
+      },
+      {
+        "label": "Exon 25",
+        "value": 25
+      },
+      {
+        "label": "Exon 26",
+        "value": 26
+      },
+      {
+        "label": "Exon 27",
+        "value": 27
+      },
+      {
+        "label": "Exon 28",
+        "value": 28
+      },
+      {
+        "label": "Exon 29",
+        "value": 29
+      },
+      {
+        "label": "Exon 30",
+        "value": 30
+      },
+      {
+        "label": "Exon 31",
+        "value": 31
+      },
+      {
+        "label": "Exon 32",
+        "value": 32
+      },
+      {
+        "label": "Exon 33",
+        "value": 33
+      },
+      {
+        "label": "Exon 34",
+        "value": 34
+      },
+      {
+        "label": "Exon 35",
+        "value": 35
+      },
+      {
+        "label": "Exon 36",
+        "value": 36
+      },
+      {
+        "label": "Exon 37",
+        "value": 37
+      },
+      {
+        "label": "Exon 38",
+        "value": 38
+      },
+      {
+        "label": "Exon 39",
+        "value": 39
+      },
+      {
+        "label": "Exon 40",
+        "value": 40
+      },
+      {
+        "label": "Exon 41",
+        "value": 41
+      },
+      {
+        "label": "Exon 42",
+        "value": 42
+      },
+      {
+        "label": "Exon 43",
+        "value": 43
+      },
+      {
+        "label": "Exon 44",
+        "value": 44
+      },
+      {
+        "label": "Exon 45",
+        "value": 45
+      },
+      {
+        "label": "Exon 46",
+        "value": 46
+      },
+      {
+        "label": "Exon 47",
+        "value": 47
+      },
+      {
+        "label": "Exon 48",
+        "value": 48
+      },
+      {
+        "label": "Exon 49",
+        "value": 49
+      },
+      {
+        "label": "Exon 50",
+        "value": 50
+      },
+      {
+        "label": "Exon 51",
+        "value": 51
+      },
+      {
+        "label": "Exon 52",
+        "value": 52
+      },
+      {
+        "label": "Exon 53",
+        "value": 53
+      },
+      {
+        "label": "Exon 54",
+        "value": 54
+      },
+      {
+        "label": "Exon 55",
+        "value": 55
+      },
+      {
+        "label": "Exon 56",
+        "value": 56
+      },
+      {
+        "label": "Exon 57",
+        "value": 57
+      },
+      {
+        "label": "Exon 58",
+        "value": 58
+      },
+      {
+        "label": "Exon 59",
+        "value": 59
+      },
+      {
+        "label": "Exon 60",
+        "value": 60
+      },
+      {
+        "label": "Exon 61",
+        "value": 61
+      },
+      {
+        "label": "Exon 62",
+        "value": 62
+      },
+      {
+        "label": "Exon 63",
+        "value": 63
+      },
+      {
+        "label": "Exon 64",
+        "value": 64
+      },
+      {
+        "label": "Exon 65",
+        "value": 65
+      },
+      {
+        "label": "Exon 66",
+        "value": 66
+      },
+      {
+        "label": "Exon 67",
+        "value": 67
+      },
+      {
+        "label": "Exon 68",
+        "value": 68
+      },
+      {
+        "label": "Exon 69",
+        "value": 69
+      },
+      {
+        "label": "Exon 70",
+        "value": 70
+      },
+      {
+        "label": "Exon 71",
+        "value": 71
+      },
+      {
+        "label": "Exon 72",
+        "value": 72
+      },
+      {
+        "label": "Exon 73",
+        "value": 73
+      },
+      {
+        "label": "Exon 74",
+        "value": 74
+      },
+      {
+        "label": "Exon 75",
+        "value": 75
+      },
+      {
+        "label": "Exon 76",
+        "value": 76
+      },
+      {
+        "label": "Exon 77",
+        "value": 77
+      },
+      {
+        "label": "Exon 78",
+        "value": 78
+      },
+      {
+        "label": "Exon 79",
+        "value": 79
+      },
+      {
+        "label": "Exon 80",
+        "value": 80
+      },
+      {
+        "label": "Exon 81",
+        "value": 81
+      },
+      {
+        "label": "Exon 82",
+        "value": 82
+      },
+      {
+        "label": "Exon 83",
+        "value": 83
+      },
+      {
+        "label": "Exon 84",
+        "value": 84
+      },
+      {
+        "label": "Exon 85",
+        "value": 85
+      },
+      {
+        "label": "Exon 86",
+        "value": 86
+      },
+      {
+        "label": "Exon 87",
+        "value": 87
+      },
+      {
+        "label": "Exon 88",
+        "value": 88
+      },
+      {
+        "label": "Exon 89",
+        "value": 89
+      },
+      {
+        "label": "Exon 90",
+        "value": 90
+      },
+      {
+        "label": "Exon 91",
+        "value": 91
+      },
+      {
+        "label": "Exon 92",
+        "value": 92
+      },
+      {
+        "label": "Exon 93",
+        "value": 93
+      },
+      {
+        "label": "Exon 94",
+        "value": 94
+      },
+      {
+        "label": "Exon 95",
+        "value": 95
+      },
+      {
+        "label": "Exon 96",
+        "value": 96
+      },
+      {
+        "label": "Exon 97",
+        "value": 97
+      },
+      {
+        "label": "Exon 98",
+        "value": 98
+      },
+      {
+        "label": "Exon 99",
+        "value": 99
+      },
+      {
+        "label": "Exon 100",
+        "value": 100
+      },
+      {
+        "label": "Exon 101",
+        "value": 101
+      },
+      {
+        "label": "Exon 102",
+        "value": 102
+      },
+      {
+        "label": "Exon 103",
+        "value": 103
+      },
+      {
+        "label": "Exon 104",
+        "value": 104
+      },
+      {
+        "label": "Exon 105",
+        "value": 105
+      }
+    ],
+    "ordinal": 9,
+    "component": "combobox",
+    "histogram": null,
+    "queryParam": "exons",
+    "shortLabel": "exons",
+    "description": null
+  },
+  {
+    "label": "Disease Association (ClinVar)",
+    "hidden": false,
+    "values": [
+      {
+        "label": "6 conditions",
+        "value": 35,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Arrhythmogenic right ventricular cardiomyopathy",
+        "value": 12,
+        "alt_labels": [
+          "Arrhythmogenic right ventricular cardiomyopathy",
+          "Arrhythmogenic right ventricular dysplasia",
+          "ARVC",
+          "ARVD",
+          "ARVD/C"
+        ]
+      },
+      {
+        "label": "Arrhythmogenic right ventricular dysplasia 1",
+        "value": 26,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Arrhythmogenic right ventricular dysplasia 2",
+        "value": 7,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Arrhythmogenic right ventricular dysplasia 9",
+        "value": 33,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Brugada syndrome",
+        "value": 38,
+        "alt_labels": [
+          "BrS"
+        ]
+      },
+      {
+        "label": "Cardiac arrest",
+        "value": 24,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Cardiac arrhythmia",
+        "value": 9,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Cardiomyopathy",
+        "value": 3,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Cardiovascular phenotype",
+        "value": 2,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Catecholaminergic polymorphic ventricular tachycardia",
+        "value": 4,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Catecholaminergic polymorphic ventricular tachycardia 1",
+        "value": 1,
+        "alt_labels": [
+          "CPVT1"
+        ]
+      },
+      {
+        "label": "Catecholaminergic polymorphic ventricular tachycardia 2",
+        "value": 36,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Childhood-onset schizophrenia",
+        "value": 31,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Conduction disorder of the heart",
+        "value": 21,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Congestive heart failure",
+        "value": 29,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Death in infancy",
+        "value": 13,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Diastolic dysfunction",
+        "value": 23,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Dilated cardiomyopathy with left ventricular noncompaction",
+        "value": 19,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "EBV-positive nodal T- and NK-cell lymphoma",
+        "value": 45,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Heart disease",
+        "value": 32,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Hypertrophic cardiomyopathy",
+        "value": 14,
+        "alt_labels": [
+          "HCM"
+        ]
+      },
+      {
+        "label": "Hypertrophic cardiomyopathy 4",
+        "value": 34,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Left ventricular noncompaction",
+        "value": 22,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Left ventricular noncompaction cardiomyopathy",
+        "value": 25,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Long QT syndrome",
+        "value": 5,
+        "alt_labels": [
+          "LQT",
+          "LQTS"
+        ]
+      },
+      {
+        "label": "Long QT syndrome 1",
+        "value": 43,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Paroxysmal familial ventricular fibrillation",
+        "value": 44,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Polymorphic ventricular tachycardia",
+        "value": 20,
+        "alt_labels": [
+          "pVT"
+        ]
+      },
+      {
+        "label": "Premature coronary artery atherosclerosis",
+        "value": 42,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Primary dilated cardiomyopathy",
+        "value": 11,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Primary familial dilated cardiomyopathy",
+        "value": 30,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Primary familial hypertrophic cardiomyopathy",
+        "value": 16,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Right ventricular cardiomyopathy",
+        "value": 41,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "RYR2-related disorder",
+        "value": 8,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Sudden cardiac arrest",
+        "value": 37,
+        "alt_labels": [
+          "Aborted SCD",
+          "Aborted sudden cardiac death",
+          "SCA"
+        ]
+      },
+      {
+        "label": "Sudden cardiac death",
+        "value": 17,
+        "alt_labels": [
+          "SCD"
+        ]
+      },
+      {
+        "label": "Sudden death",
+        "value": 39,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Sudden unexplained death",
+        "value": 15,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Syncope",
+        "value": 40,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Ventricular arrhythmias due to cardiac ryanodine receptor calcium release deficiency syndrome",
+        "value": 6,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Ventricular fibrillation",
+        "value": 27,
+        "alt_labels": [
+          "VF"
+        ]
+      },
+      {
+        "label": "Ventricular fibrillation, paroxysmal familial, type 1",
+        "value": 10,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Ventricular tachycardia",
+        "value": 28,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Wolff-Parkinson-White pattern",
+        "value": 18,
+        "alt_labels": [
+          ""
+        ]
+      }
+    ],
+    "ordinal": 10,
+    "component": "combobox",
+    "histogram": null,
+    "queryParam": "clinvarConditions",
+    "shortLabel": "diseases",
+    "description": "Filter for variants associated with a disease in ClinVar."
+  },
+  {
+    "label": "Individuals with Disease",
+    "hidden": true,
+    "values": [
+      {
+        "label": "Adult-onset primary generalised epilepsy",
+        "value": 81,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Arrhythmia at rest",
+        "value": 74,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Arrhythmogenic right ventricular cardiomyopathy",
+        "value": 12,
+        "alt_labels": [
+          "Arrhythmogenic right ventricular cardiomyopathy",
+          "Arrhythmogenic right ventricular dysplasia",
+          "ARVC",
+          "ARVD",
+          "ARVD/C"
+        ]
+      },
+      {
+        "label": "Arteriovenous malformation",
+        "value": 89,
+        "alt_labels": [
+          "AVM"
+        ]
+      },
+      {
+        "label": "Ascending aortic aneurysm",
+        "value": 106,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Atrial fibrillation",
+        "value": 64,
+        "alt_labels": [
+          "AF"
+        ]
+      },
+      {
+        "label": "Atrial flutter",
+        "value": 130,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Atrial standstill",
+        "value": 138,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Atrial tachycardia",
+        "value": 68,
+        "alt_labels": [
+          "AT"
+        ]
+      },
+      {
+        "label": "Attention deficit hyperactivity disorder",
+        "value": 108,
+        "alt_labels": [
+          "ADHD"
+        ]
+      },
+      {
+        "label": "Baseline/resting electrocardiogram abnormality",
+        "value": 48,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Bradycardia",
+        "value": 49,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Bronchial asthma",
+        "value": 120,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Brugada syndrome",
+        "value": 38,
+        "alt_labels": [
+          "BrS"
+        ]
+      },
+      {
+        "label": "Catecholaminergic polymorphic ventricular tachycardia 1",
+        "value": 1,
+        "alt_labels": [
+          "CPVT1"
+        ]
+      },
+      {
+        "label": "Catecholaminergic polymorphic ventricular tachycardia 1 asymptomatic carrier",
+        "value": 77,
+        "alt_labels": [
+          "CPVT1 Asymptomatic Carrier"
+        ]
+      },
+      {
+        "label": "Cerebral palsy",
+        "value": 133,
+        "alt_labels": [
+          "CP"
+        ]
+      },
+      {
+        "label": "Chest pain, unspecified",
+        "value": 113,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Chronotropic incompetence",
+        "value": 114,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Colon cancer",
+        "value": 96,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Congenital atrioventricular block",
+        "value": 132,
+        "alt_labels": [
+          "CAVB"
+        ]
+      },
+      {
+        "label": "Developmental delay",
+        "value": 126,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Diabetes mellitus",
+        "value": 97,
+        "alt_labels": [
+          "Diabetes"
+        ]
+      },
+      {
+        "label": "Dilated cardiomyopathy",
+        "value": 80,
+        "alt_labels": [
+          "DCM"
+        ]
+      },
+      {
+        "label": "Dizziness",
+        "value": 107,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Dyspnea",
+        "value": 110,
+        "alt_labels": [
+          "Shortness of breath"
+        ]
+      },
+      {
+        "label": "Effort-induced polymorphic ventricular arrhythmia",
+        "value": 98,
+        "alt_labels": [
+          "Effort-induced PVA"
+        ]
+      },
+      {
+        "label": "Electrical storm",
+        "value": 75,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Exercise/stress induced atrial fibrillation",
+        "value": 65,
+        "alt_labels": [
+          "Exercise/Stress Induced AF"
+        ]
+      },
+      {
+        "label": "Exercise/stress induced atrial tachycardia",
+        "value": 69,
+        "alt_labels": [
+          "Exercise/Stress Induced AT"
+        ]
+      },
+      {
+        "label": "Exercise/stress induced Long QT syndrome",
+        "value": 71,
+        "alt_labels": [
+          "Exercise/stress Induced LQT"
+        ]
+      },
+      {
+        "label": "Exercise/stress induced monomorphic premature ventricular contractions",
+        "value": 55,
+        "alt_labels": [
+          "Exercise/stress induced mPVC"
+        ]
+      },
+      {
+        "label": "Exercise/stress induced monomorphic ventricular tachycardia",
+        "value": 61,
+        "alt_labels": [
+          "Exercise/Stress Induced mVT"
+        ]
+      },
+      {
+        "label": "Exercise/stress induced polymorphic premature ventricular contractions",
+        "value": 57,
+        "alt_labels": [
+          "Exercise/Stress Induced pPVC"
+        ]
+      },
+      {
+        "label": "Exercise/stress induced polymorphic ventricular tachycardia",
+        "value": 63,
+        "alt_labels": [
+          "Exercise/Stress Induced pVT"
+        ]
+      },
+      {
+        "label": "Exercise/stress induced premature atrial contraction",
+        "value": 67,
+        "alt_labels": [
+          "Exercise/Stress Induced PAC"
+        ]
+      },
+      {
+        "label": "Exercise/stress induced seizure",
+        "value": 73,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Exercise/stress induced sudden cardiac arrest",
+        "value": 53,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Exercise/stress induced unspecified premature ventricular contractions",
+        "value": 59,
+        "alt_labels": [
+          "Exercise/Stress Induced uPVC"
+        ]
+      },
+      {
+        "label": "Fetal tachycardia",
+        "value": 119,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Glucose intolerance",
+        "value": 105,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Heart failure",
+        "value": 103,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Heart Structure Abnormality",
+        "value": 46,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Hemoptysis",
+        "value": 128,
+        "alt_labels": [
+          "Bloody cough"
+        ]
+      },
+      {
+        "label": "Hereditary spastic paraplegia",
+        "value": 125,
+        "alt_labels": [
+          "Familial spastic paraparesis",
+          "HSP"
+        ]
+      },
+      {
+        "label": "Histological abnormalities",
+        "value": 47,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Hyperglycemia",
+        "value": 94,
+        "alt_labels": [
+          "HG"
+        ]
+      },
+      {
+        "label": "Hypertelorism",
+        "value": 123,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Hypertension",
+        "value": 116,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Hypertrophic cardiomyopathy",
+        "value": 14,
+        "alt_labels": [
+          "HCM"
+        ]
+      },
+      {
+        "label": "Hypoplastic left heart syndrome",
+        "value": 84,
+        "alt_labels": [
+          "HLHS"
+        ]
+      },
+      {
+        "label": "Hypothyroidism",
+        "value": 111,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Hypoxic-ischemic encephalopathy",
+        "value": 115,
+        "alt_labels": [
+          "HIE"
+        ]
+      },
+      {
+        "label": "Intellectual disability",
+        "value": 100,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Left ventricular non-compaction",
+        "value": 79,
+        "alt_labels": [
+          "LVNC"
+        ]
+      },
+      {
+        "label": "Long QT syndrome",
+        "value": 5,
+        "alt_labels": [
+          "LQT",
+          "LQTS"
+        ]
+      },
+      {
+        "label": "Mesenteric lymphadenitis",
+        "value": 121,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Monomorphic premature ventricular contractions",
+        "value": 54,
+        "alt_labels": [
+          "mPVC"
+        ]
+      },
+      {
+        "label": "Monomorphic ventricular tachycardia",
+        "value": 60,
+        "alt_labels": [
+          "mVT"
+        ]
+      },
+      {
+        "label": "Neurofibromatosis",
+        "value": 112,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Noncompaction cardiomyopathy",
+        "value": 88,
+        "alt_labels": [
+          "NCCM"
+        ]
+      },
+      {
+        "label": "Other",
+        "value": 118,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Other (ECG Abnormal Findings)",
+        "value": 141,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Other (Histological Findings)",
+        "value": 140,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Other (Structure Abnormalities)",
+        "value": 139,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Palpitations",
+        "value": 104,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Paroxysmal nocturnal dyspnea",
+        "value": 129,
+        "alt_labels": [
+          "PND"
+        ]
+      },
+      {
+        "label": "Polymorphic premature ventricular contractions",
+        "value": 56,
+        "alt_labels": [
+          "pPVC"
+        ]
+      },
+      {
+        "label": "Polymorphic ventricular tachycardia",
+        "value": 20,
+        "alt_labels": [
+          "pVT"
+        ]
+      },
+      {
+        "label": "Postural orthostatic tachycardia syndrome",
+        "value": 99,
+        "alt_labels": [
+          "POTS"
+        ]
+      },
+      {
+        "label": "Precordial catch syndrome",
+        "value": 134,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Premature atrial contraction",
+        "value": 66,
+        "alt_labels": [
+          "PAC"
+        ]
+      },
+      {
+        "label": "Rectal cancer",
+        "value": 90,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Scoliosis",
+        "value": 136,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Seizure",
+        "value": 72,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Short-coupled variant of torsade de pointes",
+        "value": 78,
+        "alt_labels": [
+          "scTdP"
+        ]
+      },
+      {
+        "label": "Sinus node dysfunction",
+        "value": 87,
+        "alt_labels": [
+          "Sick sinus syndrome"
+        ]
+      },
+      {
+        "label": "Sinus tachycardia",
+        "value": 131,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Status lymphaticus",
+        "value": 86,
+        "alt_labels": [
+          "Status thymico-lymphaticus"
+        ]
+      },
+      {
+        "label": "Substance use disorder",
+        "value": 82,
+        "alt_labels": [
+          "SUD"
+        ]
+      },
+      {
+        "label": "Sudden cardiac arrest",
+        "value": 37,
+        "alt_labels": [
+          "Aborted SCD",
+          "Aborted sudden cardiac death",
+          "SCA"
+        ]
+      },
+      {
+        "label": "Sudden cardiac death",
+        "value": 17,
+        "alt_labels": [
+          "SCD"
+        ]
+      },
+      {
+        "label": "Sudden infant death syndrome",
+        "value": 85,
+        "alt_labels": [
+          "SIDS"
+        ]
+      },
+      {
+        "label": "Supraventricular tachycardia",
+        "value": 117,
+        "alt_labels": [
+          "SVT"
+        ]
+      },
+      {
+        "label": "Syncope",
+        "value": 40,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Syncope exercise/stress induced",
+        "value": 51,
+        "alt_labels": [
+          ""
+        ]
+      },
+      {
+        "label": "Third-degree atrioventricular block",
+        "value": 137,
+        "alt_labels": [
+          "3rd degree AVB",
+          "complete heart block",
+          "third-degree heart block"
+        ]
+      },
+      {
+        "label": "Unspecified premature ventricular contractions",
+        "value": 58,
+        "alt_labels": [
+          "uPVC"
+        ]
+      },
+      {
+        "label": "Ventricular fibrillation",
+        "value": 27,
+        "alt_labels": [
+          "VF"
+        ]
+      },
+      {
+        "label": "Ventricular tachycardia (unspecified)",
+        "value": 102,
+        "alt_labels": [
+          "VT"
+        ]
+      },
+      {
+        "label": "Weight loss",
+        "value": 109,
+        "alt_labels": [
+          ""
+        ]
+      }
+    ],
+    "ordinal": 11,
+    "component": "combobox",
+    "histogram": null,
+    "queryParam": "individualConditions",
+    "shortLabel": "diseases",
+    "description": "Filter for variants associated with patients with a recorded disease."
+  },
+  {
+    "label": "Individuals with Treatment",
+    "hidden": true,
+    "values": [
+      {
+        "label": "Beta blocker",
+        "value": 1
+      },
+      {
+        "label": "Catheter ablation",
+        "value": 7
+      },
+      {
+        "label": "Enalapril",
+        "value": 4
+      },
+      {
+        "label": "Flecainide",
+        "value": 3
+      },
+      {
+        "label": "Implantable cardioverter-defibrillator",
+        "value": 6
+      },
+      {
+        "label": "Left cardiac sympathetic denervation",
+        "value": 5
+      },
+      {
+        "label": "Verapamil",
+        "value": 2
+      }
+    ],
+    "ordinal": 12,
+    "component": "combobox",
+    "histogram": null,
+    "queryParam": "individualTreatments",
+    "shortLabel": "treatments",
+    "description": "Filter for variants associated with patients with a recorded treatment."
+  },
+  {
+    "label": "cDNA Change Position",
+    "hidden": true,
+    "values": [
+      {
+        "max": 14898,
+        "min": -307
+      }
+    ],
+    "ordinal": 13,
+    "component": "range",
+    "histogram": null,
+    "queryParam": "cPosInterval",
+    "shortLabel": null,
+    "description": "The position(s) of the nucleotide(s) affected by the variant."
+  },
+  {
+    "label": "Genomic Change Position",
+    "hidden": true,
+    "values": [
+      {
+        "max": 237833976,
+        "min": 237042069
+      }
+    ],
+    "ordinal": 14,
+    "component": "range",
+    "histogram": null,
+    "queryParam": "gPosInterval",
+    "shortLabel": null,
+    "description": "The position(s) of the nucleotide(s) affected by the variant."
+  }
+]

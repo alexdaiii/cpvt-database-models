@@ -51,6 +51,10 @@ class IndividualCondition(Base):
         comment="The symptoms that the patient experienced when they first "
         "started experiencing this condition"
     )
+    primary_diagnosis: Mapped[bool | None] = mapped_column(
+        comment="The primary diagnosis of the patient's condition in the "
+        "original excel file"
+    )
 
     # -- Relationships
     # Associations to the individual and condition
